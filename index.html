@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wayrilz PSM — Complete Learning Experience</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ========== SANOFI DESIGN SYSTEM ========== */
+:root {
+  --deep: #23004C;
+  --purple: #7A00E6;
+  --purple-mid: #5C00B5;
+  --purple-light: #F3E8FF;
+  --purple-ghost: #F9F5FF;
+  --green: #268500;
+  --green-light: #E8F5E3;
+  --red: #DA3A16;
+  --red-light: #FFF0EC;
+  --pink: #D515B9;
+  --teal: #007FAD;
+  --teal-light: #E4F4FA;
+  --bg: #F4F2F6;
+  --bg2: #F5F5F5;
+  --white: #FFFFFF;
+  --g100: #F0EEF2;
+  --g200: #E4E1E8;
+  --g300: #C9C4D0;
+  --g500: #8A8494;
+  --g700: #504A5C;
+  --g900: #2A2436;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Verdana, Geneva, sans-serif; background: var(--bg); color: var(--g900); line-height: 1.7; }
+
+/* ========== HERO ========== */
+.hero {
+  background: linear-gradient(135deg, var(--deep) 0%, var(--purple) 60%, var(--pink) 100%);
+  color: var(--white); padding: 60px 40px 50px; text-align: center; position: relative; overflow: hidden;
+}
+.hero h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; position: relative; z-index: 2; }
+.hero .sub { font-size: 13px; opacity: 0.8; position: relative; z-index: 2; }
+.hero .run-tag {
+  display: inline-block; margin-top: 12px; padding: 4px 16px; border-radius: 20px;
+  background: rgba(255,255,255,0.15); font-size: 11px; letter-spacing: 0.5px; position: relative; z-index: 2;
+}
+/* Animated SVG background blobs */
+.hero svg.bg-blobs { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.12; }
+
+/* ========== ILLUSTRATIVE BANNER ========== */
+.illust-banner {
+  background: linear-gradient(90deg, var(--red), #B52D12);
+  color: var(--white); text-align: center; padding: 10px 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+}
+
+/* ========== NAV ========== */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100; background: var(--white);
+  box-shadow: 0 2px 12px rgba(35,0,76,0.08); border-bottom: 2px solid var(--g200);
+}
+.nav {
+  max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none; gap: 0;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  padding: 12px 10px; font-size: 10.5px; font-weight: 600; color: var(--g500);
+  text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent;
+  transition: all 0.25s; letter-spacing: 0;
+}
+.nav a:hover { color: var(--purple); }
+.nav a.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+/* ========== MAIN ========== */
+.main { max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; }
+
+/* ========== SECTION ========== */
+.section { padding-top: 72px; margin-top: -48px; } /* offset for sticky nav */
+.section-header {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 28px; margin-top: 16px;
+}
+.section-num {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--deep), var(--purple));
+  color: var(--white); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; flex-shrink: 0;
+}
+.section-title { font-size: 22px; font-weight: 700; color: var(--deep); }
+
+/* ========== CARDS ========== */
+.card {
+  background: var(--white); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(35,0,76,0.05); border: 1px solid var(--g200);
+}
+.card-title {
+  font-size: 15px; font-weight: 700; color: var(--purple); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon { width: 20px; height: 20px; }
+
+/* ========== STATS ========== */
+.stats { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+.stat {
+  flex: 1; min-width: 130px; background: var(--purple-ghost); border: 1px solid var(--purple-light);
+  border-radius: 12px; padding: 16px; text-align: center; transition: transform 0.2s;
+}
+.stat:hover { transform: translateY(-2px); }
+.stat .n { font-size: 26px; font-weight: 700; color: var(--purple); overflow-wrap: break-word; word-break: break-word; }
+.stat .l { font-size: 9.5px; color: var(--g500); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 4px; }
+
+/* ========== TERM BOXES ========== */
+.term {
+  background: var(--teal-light); border-left: 4px solid var(--teal);
+  padding: 14px 18px; border-radius: 0 12px 12px 0; margin: 16px 0; font-size: 13px;
+}
+.term strong { color: #005F82; }
+.term .abbr { font-weight: 700; color: var(--teal); font-size: 14px; }
+
+/* ========== CALLOUTS ========== */
+.callout { padding: 14px 18px; border-radius: 12px; margin: 16px 0; font-size: 13px; }
+.c-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+.c-red { background: var(--red-light); border-left: 4px solid var(--red); }
+.c-green { background: var(--green-light); border-left: 4px solid var(--green); }
+.c-orange { background: #FFF8E1; border-left: 4px solid #F9A825; }
+
+/* ========== STEP FLOW ========== */
+.steps { display: flex; gap: 0; margin: 20px 0; flex-wrap: wrap; }
+.step {
+  flex: 1; min-width: 200px; padding: 18px 20px; position: relative;
+  background: var(--white); border: 1px solid var(--g200); text-align: center;
+}
+.step:first-child { border-radius: 12px 0 0 12px; }
+.step:last-child { border-radius: 0 12px 12px 0; }
+.step .step-n {
+  width: 30px; height: 30px; border-radius: 50%; margin: 0 auto 8px;
+  background: linear-gradient(135deg, var(--deep), var(--purple));
+  color: var(--white); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step .step-title { font-size: 12px; font-weight: 700; color: var(--deep); margin-bottom: 4px; }
+.step .step-desc { font-size: 11px; color: var(--g500); }
+.step-arrow {
+  position: absolute; right: -12px; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 24px; height: 24px;
+}
+
+/* ========== TABLES ========== */
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 14px 0; }
+th {
+  background: linear-gradient(135deg, var(--deep), var(--purple-mid));
+  color: var(--white); padding: 10px 12px; text-align: left;
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.4px;
+}
+td { padding: 9px 12px; border-bottom: 1px solid var(--g200); }
+tr:nth-child(even) td { background: var(--bg2); }
+tr.hl td { background: var(--purple-light); font-weight: 600; }
+
+/* ========== BADGES ========== */
+.badge {
+  display: inline-block; padding: 2px 10px; border-radius: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+}
+.b-pass { background: var(--green-light); color: var(--green); }
+.b-fail { background: var(--red-light); color: var(--red); }
+.b-pri { background: var(--purple-light); color: var(--purple); }
+.b-warn { background: #FFF8E1; color: #E65100; }
+
+/* ========== CHARTS ========== */
+.chart-wrap { position: relative; max-height: 400px; margin: 14px 0; }
+
+/* ========== VS BOX ========== */
+.vs-box { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; margin: 20px 0; }
+.vs-side { background: var(--white); border: 1px solid var(--g200); border-radius: 12px; padding: 18px 20px; font-size: 13px; }
+.vs-div { display: flex; align-items: center; justify-content: center; padding: 0 14px; font-weight: 700; color: var(--g500); }
+
+/* ========== ANIMATED SVG DIAGRAMS ========== */
+.svg-diagram { width: 100%; margin: 20px 0; }
+.svg-diagram svg { width: 100%; height: auto; display: block; }
+.svg-label { font-family: Verdana, sans-serif; }
+
+/* PSM matching animation */
+@keyframes slideToMatch { 0% { opacity:0.3; } 50% { opacity:0.6; } 100% { opacity:1; } }
+@keyframes matchPulse { 0%,100% { r:6; } 50% { r:8; } }
+@keyframes moveRight { from { transform: translateX(0); } to { transform: translateX(160px); } }
+@keyframes moveLeft { from { transform: translateX(0); } to { transform: translateX(-160px); } }
+@keyframes pairLine { from { stroke-dashoffset: 300; } to { stroke-dashoffset: 0; } }
+@keyframes scaleIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeNum { from { opacity:0; } to { opacity:1; } }
+@keyframes sigmoidDraw { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+@keyframes treeGrow { from { opacity:0; transform: translateY(-8px); } to { opacity:1; transform: translateY(0); } }
+@keyframes residualShrink { 0% { height: 20px; } 100% { height: 4px; } }
+@keyframes checkMark { from { stroke-dashoffset: 30; } to { stroke-dashoffset: 0; } }
+
+/* ========== TYPOGRAPHY ========== */
+p { margin-bottom: 12px; font-size: 13.5px; }
+h3 { font-size: 15px; font-weight: 700; color: var(--purple-mid); margin: 24px 0 10px; }
+code { background: var(--g200); padding: 1px 6px; border-radius: 4px; font-size: 12px; font-family: 'Consolas', monospace; }
+ul, ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; }
+li { margin-bottom: 5px; }
+.small { font-size: 12px; color: var(--g500); }
+
+/* ========== ANIMATIONS ========== */
+@keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(30px, -20px); } }
+@keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-20px, 30px); } }
+@keyframes float3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(15px, 15px); } }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+@keyframes drawLine { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+.fade-in { animation: fadeInUp 0.6s ease-out both; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .hero { padding: 40px 20px 36px; }
+  .hero h1 { font-size: 24px; }
+  .main { padding: 0 16px 60px; }
+  .steps { flex-direction: column; }
+  .step { border-radius: 12px !important; margin-bottom: 8px; }
+  .step-arrow { display: none; }
+  .vs-box { grid-template-columns: 1fr; gap: 10px; }
+  .vs-div { padding: 8px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<div class="hero">
+  <svg class="bg-blobs" viewBox="0 0 1200 400" preserveAspectRatio="none">
+    <circle cx="200" cy="100" r="180" fill="#fff" style="animation: float1 8s ease-in-out infinite;" />
+    <circle cx="900" cy="300" r="220" fill="#fff" style="animation: float2 10s ease-in-out infinite;" />
+    <circle cx="600" cy="50" r="120" fill="#fff" style="animation: float3 7s ease-in-out infinite;" />
+    <circle cx="1100" cy="80" r="90" fill="#fff" style="animation: float1 9s ease-in-out infinite 2s;" />
+    <circle cx="400" cy="350" r="150" fill="#fff" style="animation: float2 11s ease-in-out infinite 1s;" />
+  </svg>
+  <h1>Propensity Score Matching</h1>
+  <div class="sub">Wayrilz Causal Impact Analysis — Complete Learning Experience</div>
+  <div class="run-tag">Built for my friends, Lucy and Ya</div>
+</div>
+<div class="illust-banner">ILLUSTRATIVE — First-pass results. Missing ELAAD historical Rx data and HCA-level analysis.</div>
+
+<!-- ========== NAV ========== -->
+<div class="nav-wrap">
+  <div class="nav" id="navBar">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#question">Question</a>
+    <a href="#assumptions">Assumptions</a>
+    <a href="#design">Design</a>
+    <a href="#data">Covariates</a>
+    <a href="#ps-models">PS Models</a>
+    <a href="#logistic-vs-gbm">LR vs GBM</a>
+    <a href="#selection">Selection</a>
+    <a href="#balance">Balance</a>
+    <a href="#methods-compared">Methods</a>
+    <a href="#estimators">Estimators</a>
+    <a href="#robustness">Robustness</a>
+    <a href="#sensitivity">Sensitivity</a>
+    <a href="#subgroups">Subgroups</a>
+    <a href="#interpretation">Results</a>
+    <a href="#glossary">★ Glossary</a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="section" id="overview">
+  <div class="section-header"><div class="section-num">0</div><div class="section-title">At a Glance</div></div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">4,829</div><div class="l">A/B/C Universe</div></div>
+    <div class="stat"><div class="n">2,639</div><div class="l">Treated</div></div>
+    <div class="stat"><div class="n">2,190</div><div class="l">Control</div></div>
+    <div class="stat"><div class="n">1,524</div><div class="l">Matched Pairs</div></div>
+    <div class="stat"><div class="n">+0.05pp</div><div class="l">AIPW ATT (Primary)</div></div>
+    <div class="stat" style="border-color:var(--green);"><div class="n" style="color:var(--green);font-size:14px;letter-spacing:-0.5px;">CONVERGENT</div><div class="l">Assessment</div></div>
+  </div>
+
+  <!-- Pipeline SVG -->
+  <div class="card">
+    <div class="card-title">
+      <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M3 10h4l3-7 4 14 3-7h3" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Analysis Pipeline
+    </div>
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#23004C"/><stop offset="100%" stop-color="#7A00E6"/></linearGradient>
+          <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#268500"/><stop offset="100%" stop-color="#3DAF00"/></linearGradient>
+          <marker id="arrowP" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#7A00E6"/></marker>
+        </defs>
+        <!-- Steps -->
+        <rect x="0" y="20" width="115" height="60" rx="10" fill="url(#gPurple)"/>
+        <text x="57" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">22 PS Models</text>
+        <text x="57" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">Logistic + GBM</text>
+
+        <line x1="120" y1="50" x2="152" y2="50" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowP)" stroke-dasharray="200" style="animation: drawLine 1s ease-out 0.3s both;"/>
+
+        <rect x="158" y="20" width="115" height="60" rx="10" fill="url(#gPurple)"/>
+        <text x="215" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">3-Step Select</text>
+        <text x="215" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">Balance→Pairs→SMD</text>
+
+        <line x1="278" y1="50" x2="310" y2="50" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowP)" stroke-dasharray="200" style="animation: drawLine 1s ease-out 0.6s both;"/>
+
+        <rect x="316" y="20" width="115" height="60" rx="10" fill="url(#gPurple)"/>
+        <text x="373" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">Match &amp; Balance</text>
+        <text x="373" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">1,524 pairs, 11/11</text>
+
+        <line x1="436" y1="50" x2="468" y2="50" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowP)" stroke-dasharray="200" style="animation: drawLine 1s ease-out 0.9s both;"/>
+
+        <rect x="474" y="20" width="115" height="60" rx="10" fill="url(#gPurple)"/>
+        <text x="531" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">6 Estimators</text>
+        <text x="531" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">AIPW primary</text>
+
+        <line x1="594" y1="50" x2="626" y2="50" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowP)" stroke-dasharray="200" style="animation: drawLine 1s ease-out 1.2s both;"/>
+
+        <rect x="632" y="20" width="115" height="60" rx="10" fill="url(#gPurple)"/>
+        <text x="689" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">Robustness</text>
+        <text x="689" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">15 combos, +0.02pp</text>
+
+        <line x1="752" y1="50" x2="784" y2="50" stroke="#268500" stroke-width="2" marker-end="url(#arrowP)" stroke-dasharray="200" style="animation: drawLine 1s ease-out 1.5s both;"/>
+
+        <rect x="790" y="20" width="105" height="60" rx="10" fill="url(#gGreen)"/>
+        <text x="842" y="46" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Verdana">CONVERGENT</text>
+        <text x="842" y="62" text-anchor="middle" fill="#fff" font-size="8" font-family="Verdana" opacity="0.8">No evidence</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== RESEARCH QUESTION ==================== -->
+<div class="section" id="question">
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">The Research Question</div></div>
+  <div class="card">
+    <p>Does Sanofi's <strong>Turing</strong> AI recommendation engine — which delivers Next Best Action (<strong>NBA</strong>) and Next Best Channel (<strong>NBC</strong>) suggestions to field sales representatives — cause an increase in patient initiations for <strong>Wayrilz</strong> (rilzabrutinib)?</p>
+    <p>We cannot run a randomized controlled trial. Turing was rolled out based on business rules, not random assignment. So we use <strong>Propensity Score Matching (PSM)</strong> — a quasi-experimental method that constructs a comparable control group from observational data.</p>
+    <div class="term"><span class="abbr">PSM</span> — <strong>Propensity Score Matching.</strong> A statistical technique that pairs treated units (HCPs who received Turing suggestions) with control units (HCPs who did not) based on their estimated probability of receiving treatment, given observed characteristics.</div>
+    <div class="term"><span class="abbr">ATT</span> — <strong>Average Treatment Effect on the Treated.</strong> The causal quantity we estimate: among HCPs who received suggestions, how much did the suggestion change their initiation rate? Reported in percentage points (pp).</div>
+
+    <!-- ===== PSM CONCEPT ANIMATED SVG ===== -->
+    <div class="card-title" style="margin-top:24px;">How PSM Works — Visual Walkthrough</div>
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gTreated" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7A00E6"/><stop offset="100%" stop-color="#5C00B5"/></linearGradient>
+          <linearGradient id="gControl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#007FAD"/><stop offset="100%" stop-color="#005F82"/></linearGradient>
+          <linearGradient id="gMatched" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#268500"/><stop offset="100%" stop-color="#1B6000"/></linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- Phase labels -->
+        <text x="130" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">BEFORE MATCHING</text>
+        <text x="460" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">PROPENSITY SCORES</text>
+        <text x="770" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">AFTER MATCHING</text>
+
+        <!-- Divider arrows -->
+        <line x1="275" y1="30" x2="275" y2="320" stroke="#E4E1E8" stroke-width="1" stroke-dasharray="6,4"/>
+        <line x1="605" y1="30" x2="605" y2="320" stroke="#E4E1E8" stroke-width="1" stroke-dasharray="6,4"/>
+        <path d="M280,170 L310,170" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowPSM)" style="animation: drawLine 0.8s ease-out 1s both;"/>
+        <path d="M610,170 L640,170" stroke="#268500" stroke-width="2" marker-end="url(#arrowPSM2)" style="animation: drawLine 0.8s ease-out 3.5s both;"/>
+        <defs>
+          <marker id="arrowPSM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7A00E6"/></marker>
+          <marker id="arrowPSM2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#268500"/></marker>
+        </defs>
+
+        <!-- PHASE 1: Before — Treated group (purple, scattered high) -->
+        <text x="80" y="52" text-anchor="middle" fill="#7A00E6" font-size="10" font-weight="600" class="svg-label">Treated (2,639)</text>
+        <circle cx="40" cy="80" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.1s both;"/>
+        <circle cx="75" cy="95" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.15s both;"/>
+        <circle cx="110" cy="70" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.2s both;"/>
+        <circle cx="55" cy="110" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.25s both;"/>
+        <circle cx="130" cy="100" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.3s both;"/>
+        <circle cx="95" cy="125" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.35s both;"/>
+        <circle cx="155" cy="85" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.4s both;"/>
+        <circle cx="180" cy="115" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.45s both;"/>
+        <circle cx="200" cy="75" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.5s both;"/>
+        <circle cx="220" cy="105" r="5" fill="url(#gTreated)" style="animation: fadeInUp 0.4s ease-out 0.55s both;"/>
+
+        <!-- Before — Control group (teal, scattered low) -->
+        <text x="80" y="185" text-anchor="middle" fill="#007FAD" font-size="10" font-weight="600" class="svg-label">Control (2,190)</text>
+        <circle cx="35" cy="210" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.2s both;"/>
+        <circle cx="70" cy="240" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.25s both;"/>
+        <circle cx="100" cy="225" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.3s both;"/>
+        <circle cx="135" cy="260" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.35s both;"/>
+        <circle cx="165" cy="235" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.4s both;"/>
+        <circle cx="195" cy="270" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.45s both;"/>
+        <circle cx="220" cy="250" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.5s both;"/>
+        <circle cx="55" cy="280" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.55s both;"/>
+        <circle cx="150" cy="300" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.6s both;"/>
+        <circle cx="240" cy="215" r="5" fill="url(#gControl)" style="animation: fadeInUp 0.4s ease-out 0.65s both;"/>
+
+        <!-- Annotation:"Very different groups" -->
+        <rect x="50" y="145" rx="6" width="120" height="26" fill="#FFF0EC" stroke="#DA3A16" stroke-width="1" style="animation: scaleIn 0.4s ease-out 0.7s both;"/>
+        <text x="110" y="163" text-anchor="middle" fill="#DA3A16" font-size="9" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.9s both;">&#x26A0; Very different groups</text>
+
+        <!-- PHASE 2: Propensity scores — number line -->
+        <text x="460" y="52" text-anchor="middle" fill="#23004C" font-size="10" font-weight="600" class="svg-label" style="animation: fadeNum 0.5s ease-out 1.3s both;">Each HCP gets a score: P(Treatment | X)</text>
+        <line x1="330" y1="170" x2="590" y2="170" stroke="#C9C4D0" stroke-width="2" style="animation: drawLine 0.6s ease-out 1.5s both; stroke-dasharray:300;"/>
+        <text x="330" y="190" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 2s both;">0.0</text>
+        <text x="460" y="190" text-anchor="middle" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 2s both;">0.5</text>
+        <text x="586" y="190" text-anchor="end" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 2s both;">1.0</text>
+
+        <!-- PS dots — treated (purple, cluster high) -->
+        <circle cx="480" cy="150" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.1s both;"/>
+        <circle cx="500" cy="140" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.2s both;"/>
+        <circle cx="520" cy="148" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.3s both;"/>
+        <circle cx="540" cy="135" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.4s both;"/>
+        <circle cx="555" cy="145" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.5s both;"/>
+        <circle cx="460" cy="142" r="5" fill="url(#gTreated)" style="animation: scaleIn 0.3s ease-out 2.15s both;"/>
+
+        <!-- PS dots — control (teal, cluster low) -->
+        <circle cx="370" cy="200" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.2s both;"/>
+        <circle cx="390" cy="210" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.3s both;"/>
+        <circle cx="420" cy="195" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.4s both;"/>
+        <circle cx="440" cy="205" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.5s both;"/>
+        <circle cx="465" cy="198" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.55s both;"/>
+        <circle cx="350" cy="208" r="5" fill="url(#gControl)" style="animation: scaleIn 0.3s ease-out 2.25s both;"/>
+
+        <!-- Overlap zone highlight -->
+        <rect x="440" y="128" rx="8" width="50" height="90" fill="#268500" opacity="0.08" style="animation: scaleIn 0.4s ease-out 2.6s both;"/>
+        <text x="465" y="240" text-anchor="middle" fill="#268500" font-size="9" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.8s both;">Overlap zone</text>
+
+        <!-- Matching lines in overlap -->
+        <line x1="460" y1="142" x2="465" y2="198" stroke="#268500" stroke-width="1.5" stroke-dasharray="300" style="animation: pairLine 0.5s ease-out 3s both;" opacity="0.6"/>
+        <line x1="480" y1="150" x2="465" y2="198" stroke="#268500" stroke-width="1.5" stroke-dasharray="300" style="animation: pairLine 0.5s ease-out 3.1s both;" opacity="0.6"/>
+
+        <!-- PHASE 3: After matching — paired dots -->
+        <text x="770" y="52" text-anchor="middle" fill="#268500" font-size="10" font-weight="600" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.8s both;">Matched Pairs: Comparable</text>
+
+        <!-- Matched pair 1 -->
+        <circle cx="680" cy="90" r="6" fill="url(#gTreated)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4s both;"/>
+        <circle cx="700" cy="90" r="6" fill="url(#gControl)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.1s both;"/>
+        <line x1="686" y1="90" x2="694" y2="90" stroke="#268500" stroke-width="2" style="animation: drawLine 0.3s ease-out 4.2s both; stroke-dasharray:20;"/>
+
+        <!-- Matched pair 2 -->
+        <circle cx="740" cy="90" r="6" fill="url(#gTreated)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.15s both;"/>
+        <circle cx="760" cy="90" r="6" fill="url(#gControl)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.25s both;"/>
+        <line x1="746" y1="90" x2="754" y2="90" stroke="#268500" stroke-width="2" style="animation: drawLine 0.3s ease-out 4.35s both; stroke-dasharray:20;"/>
+
+        <!-- Matched pair 3 -->
+        <circle cx="810" cy="90" r="6" fill="url(#gTreated)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.3s both;"/>
+        <circle cx="830" cy="90" r="6" fill="url(#gControl)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.4s both;"/>
+        <line x1="816" y1="90" x2="824" y2="90" stroke="#268500" stroke-width="2" style="animation: drawLine 0.3s ease-out 4.5s both; stroke-dasharray:20;"/>
+
+        <!-- Matched pair 4 -->
+        <circle cx="680" cy="130" r="6" fill="url(#gTreated)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.4s both;"/>
+        <circle cx="700" cy="130" r="6" fill="url(#gControl)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.5s both;"/>
+        <line x1="686" y1="130" x2="694" y2="130" stroke="#268500" stroke-width="2" style="animation: drawLine 0.3s ease-out 4.6s both; stroke-dasharray:20;"/>
+
+        <!-- Matched pair 5 -->
+        <circle cx="740" cy="130" r="6" fill="url(#gTreated)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.55s both;"/>
+        <circle cx="760" cy="130" r="6" fill="url(#gControl)" filter="url(#glow)" style="animation: scaleIn 0.3s ease-out 4.65s both;"/>
+        <line x1="746" y1="130" x2="754" y2="130" stroke="#268500" stroke-width="2" style="animation: drawLine 0.3s ease-out 4.75s both; stroke-dasharray:20;"/>
+
+        <!-- Result annotation -->
+        <rect x="660" y="165" rx="10" width="210" height="50" fill="#E8F5E3" stroke="#268500" stroke-width="1.5" style="animation: scaleIn 0.4s ease-out 5s both;"/>
+        <text x="765" y="185" text-anchor="middle" fill="#268500" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 5.2s both;">1,524 matched pairs</text>
+        <text x="765" y="200" text-anchor="middle" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 5.3s both;">Similar on all 11 covariates</text>
+
+        <!-- Unmatched (faded) -->
+        <circle cx="680" cy="260" r="4" fill="#7A00E6" opacity="0.15" style="animation: fadeNum 0.3s ease-out 5s both;"/>
+        <circle cx="700" cy="275" r="4" fill="#7A00E6" opacity="0.15" style="animation: fadeNum 0.3s ease-out 5.05s both;"/>
+        <circle cx="720" cy="265" r="4" fill="#007FAD" opacity="0.15" style="animation: fadeNum 0.3s ease-out 5.1s both;"/>
+        <circle cx="745" cy="280" r="4" fill="#007FAD" opacity="0.15" style="animation: fadeNum 0.3s ease-out 5.15s both;"/>
+        <text x="765" y="310" text-anchor="middle" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 5.2s both;">Unmatched — dropped from analysis</text>
+
+        <!-- Legend -->
+        <circle cx="330" cy="310" r="5" fill="url(#gTreated)"/>
+        <text x="340" y="314" fill="#504A5C" font-size="9" class="svg-label">Treated HCP</text>
+        <circle cx="420" cy="310" r="5" fill="url(#gControl)"/>
+        <text x="430" y="314" fill="#504A5C" font-size="9" class="svg-label">Control HCP</text>
+        <line x1="500" y1="310" x2="516" y2="310" stroke="#268500" stroke-width="2"/>
+        <text x="522" y="314" fill="#504A5C" font-size="9" class="svg-label">Matched pair</text>
+      </svg>
+    </div>
+    <p class="small">Animation shows the PSM workflow: start with two dissimilar groups → estimate each HCP's propensity score (probability of receiving treatment) → match treated HCPs to control HCPs with similar scores → result is 1,524 balanced pairs for causal comparison.</p>
+
+  </div>
+</div>
+
+<!-- ==================== CORE ASSUMPTIONS ==================== -->
+<div class="section" id="assumptions">
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">Core Assumptions of PSM</div></div>
+  <div class="card">
+    <p>PSM produces valid causal estimates <strong>only if</strong> four assumptions hold. Violating any one of them undermines the entire analysis. These are not optional — they are the logical foundation that separates PSM from a naive comparison.</p>
+
+    <div class="card-title">1. Unconfoundedness (Ignorability)</div>
+    <div class="term"><span class="abbr">Unconfoundedness</span> — Also called the <strong>ignorability</strong> or <strong>conditional independence</strong> assumption. It states: <em>conditional on observed covariates X, treatment assignment is independent of potential outcomes.</em> In plain language: after we account for the 11 covariates in our model, there are no remaining hidden factors that simultaneously drive both (a) whether an HCP receives a Turing suggestion and (b) whether that HCP's patients initiate on Wayrilz. If an unmeasured confounder exists — say, a formulary change at certain hospitals — PSM cannot remove that bias.</div>
+    <div class="callout c-red"><strong>This is untestable.</strong> We can never prove that all confounders are observed. The E-value (Section 9) quantifies how strong an unmeasured confounder would need to be to overturn our result — but it cannot prove one does not exist. This is why we describe results as ILLUSTRATIVE.</div>
+
+    <div class="card-title">2. Positivity (Common Support / Overlap)</div>
+    <div class="term"><span class="abbr">Positivity</span> — Every HCP must have a <strong>non-zero probability</strong> of being in either group. Formally: 0 &lt; P(Treatment=1 | X) &lt; 1 for all values of X in the sample. If some HCPs have a propensity score of exactly 0 or 1, they cannot be matched — there is no comparable unit in the other group. This is especially critical for <strong>IPW</strong> and <strong>AIPW</strong>, where extreme scores (near 0 or 1) produce enormous weights that destabilize the estimate.</div>
+    <div class="term"><span class="abbr">Common Support</span> — The region of propensity score values where both treated and control HCPs exist. Matching only occurs within common support. HCPs outside this region are dropped. In our analysis, the caliper (0.2 × SD of propensity scores) enforces common support by refusing to match treated HCPs with no sufficiently close control.</div>
+
+    <!-- ===== COMMON SUPPORT ANIMATED SVG ===== -->
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 255" xmlns="http://www.w3.org/2000/svg">
+        <text x="450" y="18" text-anchor="middle" fill="#23004C" font-size="12" font-weight="700" class="svg-label">Positivity &amp; Common Support — Where Matching is Valid</text>
+
+        <!-- PS axis -->
+        <line x1="60" y1="155" x2="840" y2="155" stroke="#C9C4D0" stroke-width="1.5"/>
+        <text x="60" y="172" fill="#8A8494" font-size="9" class="svg-label">0.0</text>
+        <text x="450" y="172" text-anchor="middle" fill="#8A8494" font-size="9" class="svg-label">0.5</text>
+        <text x="836" y="172" text-anchor="end" fill="#8A8494" font-size="9" class="svg-label">1.0</text>
+        <text x="450" y="188" text-anchor="middle" fill="#504A5C" font-size="9" font-weight="600" class="svg-label">Propensity Score</text>
+
+        <!-- Common support zone (green, draw first so it's behind curves) -->
+        <rect x="250" y="32" width="400" height="122" rx="8" fill="#268500" opacity="0.07" style="animation: fadeNum 0.5s ease-out 2s both;"/>
+
+        <!-- Control distribution (teal, left-skewed bell curve, FILLED) -->
+        <path d="M70,154 C70,154 100,150 140,130 C180,110 210,60 250,45 C290,30 330,42 380,70 C430,98 480,130 540,145 C600,152 650,154 660,154 Z" fill="#007FAD" opacity="0.18" style="animation: fadeNum 0.8s ease-out 0.3s both;"/>
+        <path d="M70,154 C70,154 100,150 140,130 C180,110 210,60 250,45 C290,30 330,42 380,70 C430,98 480,130 540,145 C600,152 650,154 660,154" stroke="#007FAD" stroke-width="2.5" fill="none" style="animation: fadeNum 0.8s ease-out 0.3s both;"/>
+        <text x="220" y="38" fill="#007FAD" font-size="10" font-weight="600" class="svg-label" style="animation: fadeNum 0.3s ease-out 1s both;">Control</text>
+
+        <!-- Treated distribution (purple, right-skewed bell curve, FILLED) -->
+        <path d="M240,154 C300,152 350,145 420,130 C470,118 520,90 560,60 C600,35 640,30 680,42 C720,55 760,100 800,130 C830,148 840,154 840,154 Z" fill="#7A00E6" opacity="0.18" style="animation: fadeNum 0.8s ease-out 0.6s both;"/>
+        <path d="M240,154 C300,152 350,145 420,130 C470,118 520,90 560,60 C600,35 640,30 680,42 C720,55 760,100 800,130 C830,148 840,154 840,154" stroke="#7A00E6" stroke-width="2.5" fill="none" style="animation: fadeNum 0.8s ease-out 0.6s both;"/>
+        <text x="680" y="35" fill="#7A00E6" font-size="10" font-weight="600" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.3s both;">Treated</text>
+
+        <!-- Violation zone labels -->
+        <rect x="80" y="82" rx="10" width="130" height="38" fill="#FFF0EC" stroke="#DA3A16" stroke-width="1" style="animation: fadeNum 0.4s ease-out 2.3s both;"/>
+        <text x="145" y="98" text-anchor="middle" fill="#DA3A16" font-size="8" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.5s both;">Positivity violated</text>
+        <text x="145" y="112" text-anchor="middle" fill="#DA3A16" font-size="7" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.6s both;">No treated HCPs here</text>
+
+        <rect x="690" y="82" rx="10" width="130" height="38" fill="#FFF0EC" stroke="#DA3A16" stroke-width="1" style="animation: fadeNum 0.4s ease-out 2.3s both;"/>
+        <text x="755" y="98" text-anchor="middle" fill="#DA3A16" font-size="8" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.5s both;">Positivity violated</text>
+        <text x="755" y="112" text-anchor="middle" fill="#DA3A16" font-size="7" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.6s both;">No control HCPs here</text>
+
+        <!-- Legend row -->
+        <rect x="280" y="198" width="10" height="10" rx="2" fill="#007FAD" opacity="0.4"/>
+        <text x="294" y="207" fill="#504A5C" font-size="8" class="svg-label">Control</text>
+        <rect x="345" y="198" width="10" height="10" rx="2" fill="#7A00E6" opacity="0.4"/>
+        <text x="359" y="207" fill="#504A5C" font-size="8" class="svg-label">Treated</text>
+        <rect x="410" y="198" width="10" height="10" rx="2" fill="#268500" opacity="0.15"/>
+        <text x="424" y="207" fill="#504A5C" font-size="8" class="svg-label">Overlap</text>
+
+        <!-- Common support label (below legend) -->
+        <text x="450" y="238" text-anchor="middle" fill="#268500" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 2.3s both;">Common Support Region — matching valid here</text>
+      </svg>
+    </div>
+
+    <div class="card-title">3. SUTVA (Stable Unit Treatment Value Assumption)</div>
+    <div class="term"><span class="abbr">SUTVA</span> — Two components: <strong>(1) No interference</strong> — one HCP's treatment does not affect another HCP's outcome. <strong>(2) No hidden treatment variations</strong> — the"treatment" (receiving a Turing suggestion) means the same thing for every HCP. SUTVA is potentially violated when multiple HCPs share the same Healthcare Account (<strong>HCA</strong>), because one rep's behavior toward one HCP at an account may influence their behavior toward other HCPs at the same account.</div>
+    <div class="callout c-orange"><strong>Known risk:</strong> Our current unit of analysis is the individual HCP. An HCA-level analysis (pending Ashutosh's linking table) would address the interference concern by analyzing at the account level where the rep's decision is made.</div>
+
+    <div class="card-title">4. No Model Misspecification</div>
+    <div class="term">The propensity score model must be correctly specified — it must include all relevant confounders and model their relationship to treatment assignment adequately. A misspecified PS model produces biased scores, which means matches are not truly comparable. This is why we sweep <strong>22 models</strong> across two families (logistic + GBM): if multiple specifications yield similar ATT estimates, the result is more credible regardless of which model is"correct."</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Why These Assumptions Matter</div>
+    <p><strong>Selection bias</strong> is the core problem PSM addresses. Because Turing suggestions were not randomly assigned — they followed business rules based on rep workload, HCP segment, geography, and other factors — the treated and control groups differ systematically. A naive comparison of initiation rates between groups would confuse the effect of treatment with the effect of these pre-existing differences. PSM attempts to remove selection bias by making the groups comparable on observed covariates.</p>
+    <p><strong>Confounding</strong> occurs when a variable influences both treatment assignment and the outcome. For example, HCPs with higher call volume (a confounder) are more likely to receive suggestions AND more likely to have initiations simply because they interact more with reps. If we do not adjust for call volume, we would falsely attribute the higher initiation rate to Turing rather than to the underlying engagement pattern. Our 11 covariates are chosen specifically to capture the major confounders.</p>
+    <p><strong>Endogeneity</strong> arises when the treatment variable is correlated with the error term — meaning there are unobserved factors affecting both treatment and outcome. In our context, endogeneity would occur if we defined treatment as"rep actioned the suggestion" rather than"HCP received a suggestion," because actioning is a post-treatment behavior influenced by unobserved rep motivation. The ITT (Intention-to-Treat) design avoids this specific form of endogeneity.</p>
+  </div>
+</div>
+
+<!-- ==================== STUDY DESIGN ==================== -->
+<div class="section" id="design">
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">Study Design &amp; Treatment Definition</div></div>
+  <div class="card">
+    <div class="card-title">Treatment: ITT (Intention-to-Treat)</div>
+    <div class="term"><span class="abbr">ITT</span> — Treatment is defined as <em>receiving</em> &ge;1 Turing suggestion after Nov 1, 2025, regardless of whether the rep accepted, dismissed, or ignored it. This avoids <strong>endogeneity</strong> — we do not condition on the rep's post-treatment response.</div>
+    <div class="callout c-red"><strong>Why not define treatment by"actioning"?</strong> Proactive reps who accept suggestions may also be more proactive in driving initiations. Conditioning on a post-treatment behavior makes the estimated effect uninterpretable.</div>
+    <p><strong>Outcome:</strong> Binary — did the HCP have &ge;1 patient initiation in the post-period (Nov 2025 – Mar 2026)?</p>
+    <div class="callout c-orange"><strong>Key constraint:</strong> Rare disease initiations have a ~2-month lag. With only ~5 months of data, we may lack the power to detect a real effect. Results are ILLUSTRATIVE — more data and ELAAD integration will strengthen the test.</div>
+  </div>
+</div>
+
+<!-- ==================== DATA ==================== -->
+<div class="section" id="data">
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">Data &amp; Covariates</div></div>
+  <div class="card">
+    <div class="card-title">Universe: 4,829 HCPs (Segments A, B, C)</div>
+    <div class="stats">
+      <div class="stat"><div class="n">20,414</div><div class="l">Total Datamart</div></div>
+      <div class="stat"><div class="n">4,829</div><div class="l">A/B/C (PSM)</div></div>
+      <div class="stat"><div class="n">54.7%</div><div class="l">Treatment Rate</div></div>
+    </div>
+    <div class="term"><strong>Covariate</strong> — A pre-treatment variable that might predict both treatment assignment and the outcome. We include covariates so matched pairs are similar on these characteristics, isolating the treatment effect.</div>
+    <div class="term"><span class="abbr">SMD</span> — <strong>Standardized Mean Difference.</strong> Formula: (mean_treated − mean_control) / pooled_SD, where <strong>pooled_SD</strong> = √((SD²_treated + SD²_control) / 2) — the root-mean-square of both groups' standard deviations. Pooling ensures the denominator does not change after matching (unlike using the matched-sample SD, which would make pre/post comparisons inconsistent). Threshold: <strong>|SMD| &lt; 0.1 = balanced.</strong> This is the sole balance criterion — no Welch's t-test.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">11 Covariates — Pre-Match Imbalances</div>
+    <div class="chart-wrap" style="max-height:340px;"><canvas id="chartPreSMD"></canvas></div>
+    <p class="small">Treated HCPs have dramatically higher call volume (SMD=0.627) and RTE volume (0.501), and are less likely to be segment C (−0.445). These are the confounders PSM must eliminate.</p>
+  </div>
+</div>
+
+<!-- ==================== PS MODELS ==================== -->
+<div class="section" id="ps-models">
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Propensity Score Models (22 Swept)</div></div>
+  <div class="card">
+    <div class="card-title">Two Model Families</div>
+    <div class="term"><strong>Logistic Regression</strong> — Linear classifier. One hyperparameter: <code>C</code> (inverse regularization strength). Smaller C = stronger penalty = simpler model. Swept: C = 0.01, 0.1, 1.0, 10.0 → <strong>4 models</strong>.</div>
+
+    <!-- ===== LOGISTIC REGRESSION ANIMATED SVG ===== -->
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gSigmoid" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#007FAD"/><stop offset="100%" stop-color="#7A00E6"/></linearGradient>
+        </defs>
+
+        <text x="450" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">How Logistic Regression Estimates Propensity Scores</text>
+
+        <!-- Axes -->
+        <line x1="80" y1="240" x2="820" y2="240" stroke="#C9C4D0" stroke-width="1.5" style="animation: drawLine 0.5s ease-out 0.2s both; stroke-dasharray:800;"/>
+        <line x1="80" y1="240" x2="80" y2="45" stroke="#C9C4D0" stroke-width="1.5" style="animation: drawLine 0.5s ease-out 0.3s both; stroke-dasharray:250;"/>
+
+        <!-- Y-axis labels -->
+        <text x="60" y="60" text-anchor="end" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.5s both;">1.0</text>
+        <text x="60" y="145" text-anchor="end" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.5s both;">0.5</text>
+        <text x="60" y="244" text-anchor="end" fill="#8A8494" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.5s both;">0.0</text>
+        <text x="30" y="145" text-anchor="middle" fill="#504A5C" font-size="9" font-weight="600" class="svg-label" transform="rotate(-90,30,145)" style="animation: fadeNum 0.3s ease-out 0.6s both;">P(Treatment)</text>
+
+        <!-- X-axis label -->
+        <text x="450" y="268" text-anchor="middle" fill="#504A5C" font-size="9" font-weight="600" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.6s both;">Linear combination of covariates (β₀ + β₁x₁ + β₂x₂ + ... + β₁₁x₁₁)</text>
+
+        <!-- 0.5 threshold dashed line -->
+        <line x1="80" y1="140" x2="820" y2="140" stroke="#DA3A16" stroke-width="1" stroke-dasharray="6,4" opacity="0.4" style="animation: drawLine 0.5s ease-out 0.8s both;"/>
+        <text x="830" y="144" fill="#DA3A16" font-size="8" class="svg-label" opacity="0.6" style="animation: fadeNum 0.3s ease-out 0.9s both;">p=0.5</text>
+
+        <!-- Data points — Control (bottom, y≈0) -->
+        <circle cx="120" cy="230" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.7s both;"/>
+        <circle cx="160" cy="232" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.75s both;"/>
+        <circle cx="200" cy="228" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.8s both;"/>
+        <circle cx="250" cy="233" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.85s both;"/>
+        <circle cx="300" cy="226" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.9s both;"/>
+        <circle cx="340" cy="230" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.95s both;"/>
+        <circle cx="390" cy="222" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1s both;"/>
+        <circle cx="420" cy="225" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.05s both;"/>
+        <circle cx="460" cy="220" r="4" fill="#007FAD" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.1s both;"/>
+
+        <!-- Data points — Treated (top, y≈1) -->
+        <circle cx="380" cy="60" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.9s both;"/>
+        <circle cx="430" cy="55" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 0.95s both;"/>
+        <circle cx="480" cy="58" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1s both;"/>
+        <circle cx="530" cy="52" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.05s both;"/>
+        <circle cx="580" cy="56" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.1s both;"/>
+        <circle cx="630" cy="54" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.15s both;"/>
+        <circle cx="680" cy="50" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.2s both;"/>
+        <circle cx="720" cy="53" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.25s both;"/>
+        <circle cx="760" cy="58" r="4" fill="#7A00E6" opacity="0.5" style="animation: scaleIn 0.2s ease-out 1.3s both;"/>
+
+        <!-- Sigmoid curve — drawn with animation -->
+        <path d="M90,235 C120,235 180,233 260,228 C340,220 380,205 420,170 C440,152 450,140 460,125 C480,95 500,75 540,62 C580,54 650,50 780,50"
+              stroke="url(#gSigmoid)" stroke-width="3.5" fill="none" stroke-linecap="round"
+              stroke-dasharray="900" style="animation: sigmoidDraw 2s ease-in-out 1.5s both;"/>
+
+        <!-- Sigmoid label -->
+        <rect x="500" y="100" rx="6" width="180" height="28" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1" style="animation: scaleIn 0.3s ease-out 3s both;"/>
+        <text x="590" y="118" text-anchor="middle" fill="#7A00E6" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.2s both;">σ(z) = 1 / (1 + e⁻ᶻ)</text>
+
+        <!-- C parameter annotation -->
+        <rect x="130" y="40" rx="8" width="200" height="55" fill="#E4F4FA" stroke="#007FAD" stroke-width="1" style="animation: scaleIn 0.3s ease-out 3.5s both;"/>
+        <text x="230" y="58" text-anchor="middle" fill="#007FAD" font-size="9" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.7s both;">C controls the curve shape</text>
+        <text x="230" y="72" text-anchor="middle" fill="#005F82" font-size="8" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.8s both;">Small C → flatter (more regularized)</text>
+        <text x="230" y="84" text-anchor="middle" fill="#005F82" font-size="8" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.9s both;">Large C → steeper (less regularized)</text>
+
+        <!-- Output annotation -->
+        <path d="M650,50 L650,30" stroke="#268500" stroke-width="1.5" stroke-dasharray="20" style="animation: drawLine 0.3s ease-out 3.5s both;"/>
+        <text x="700" y="32" text-anchor="middle" fill="#268500" font-size="9" font-weight="600" class="svg-label" style="animation: fadeNum 0.3s ease-out 3.7s both;">Output = Propensity Score</text>
+
+        <!-- Legend -->
+        <circle cx="620" y="255" cy="255" r="4" fill="#7A00E6" opacity="0.6"/>
+        <text x="630" y="259" fill="#504A5C" font-size="9" class="svg-label">Treated (y=1)</text>
+        <circle cx="720" cy="255" r="4" fill="#007FAD" opacity="0.6"/>
+        <text x="730" y="259" fill="#504A5C" font-size="9" class="svg-label">Control (y=0)</text>
+      </svg>
+    </div>
+    <p class="small">Logistic regression fits a sigmoid (S-shaped) curve to binary treatment labels. For each HCP, the model takes 11 covariate values, computes a weighted sum, and passes it through the sigmoid function to produce a propensity score between 0 and 1. The <code>C</code> parameter controls how flexible the curve is.</p>
+
+    <div class="term"><strong>GBM (Gradient Boosting Machine)</strong> — Ensemble of sequential decision trees. Three hyperparameters: <code>n_estimators</code> (number of trees; 1st number), <code>max_depth</code> (tree depth; 2nd number), <code>learning_rate</code> (shrinkage; 3rd number). Notation: <strong>GBM (50/2/0.1)</strong> = 50 trees, depth 2, rate 0.1. Grid: 3×3×2 = <strong>18 models</strong>.</div>
+
+    <!-- ===== GBM ANIMATED SVG ===== -->
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gTree1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7A00E6"/><stop offset="100%" stop-color="#A855F7"/></linearGradient>
+          <linearGradient id="gTree2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5C00B5"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+          <linearGradient id="gTree3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#23004C"/><stop offset="100%" stop-color="#6D28D9"/></linearGradient>
+          <linearGradient id="gResid" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DA3A16"/><stop offset="100%" stop-color="#F97316"/></linearGradient>
+        </defs>
+
+        <text x="450" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">How Gradient Boosting Builds an Ensemble</text>
+        <text x="450" y="38" text-anchor="middle" fill="#8A8494" font-size="10" class="svg-label">Each tree corrects the mistakes of the previous one</text>
+
+        <!-- ===== TREE 1 ===== -->
+        <g style="animation: treeGrow 0.5s ease-out 0.5s both;">
+          <!-- Tree structure -->
+          <rect x="30" y="65" rx="6" width="100" height="24" fill="url(#gTree1)"/>
+          <text x="80" y="81" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" class="svg-label">Tree 1</text>
+          <!-- Root node -->
+          <circle cx="80" cy="110" r="10" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1.5"/>
+          <text x="80" y="114" text-anchor="middle" fill="#7A00E6" font-size="7" font-weight="700" class="svg-label">split</text>
+          <!-- Branches -->
+          <line x1="70" y1="118" x2="50" y2="140" stroke="#7A00E6" stroke-width="1.5"/>
+          <line x1="90" y1="118" x2="110" y2="140" stroke="#7A00E6" stroke-width="1.5"/>
+          <!-- Leaf nodes -->
+          <rect x="35" y="142" rx="4" width="30" height="18" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="50" y="155" text-anchor="middle" fill="#268500" font-size="7" font-weight="700" class="svg-label">0.3</text>
+          <rect x="95" y="142" rx="4" width="30" height="18" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1"/>
+          <text x="110" y="155" text-anchor="middle" fill="#7A00E6" font-size="7" font-weight="700" class="svg-label">0.7</text>
+          <!-- Label -->
+          <text x="80" y="180" text-anchor="middle" fill="#504A5C" font-size="8" class="svg-label">Initial prediction</text>
+        </g>
+
+        <!-- Residual bar 1 (large) -->
+        <g style="animation: treeGrow 0.5s ease-out 1.2s both;">
+          <rect x="55" y="195" rx="3" width="50" height="40" fill="url(#gResid)" opacity="0.7"/>
+          <text x="80" y="220" text-anchor="middle" fill="#fff" font-size="8" font-weight="700" class="svg-label">Error</text>
+          <text x="80" y="250" text-anchor="middle" fill="#DA3A16" font-size="8" font-weight="600" class="svg-label">Large residuals</text>
+        </g>
+
+        <!-- Arrow 1→2 -->
+        <g style="animation: fadeInUp 0.4s ease-out 1.6s both;">
+          <line x1="145" y1="130" x2="195" y2="130" stroke="#7A00E6" stroke-width="2" marker-end="url(#arrowGBM)"/>
+          <text x="170" y="120" text-anchor="middle" fill="#7A00E6" font-size="8" font-weight="600" class="svg-label">× η</text>
+          <text x="170" y="155" text-anchor="middle" fill="#8A8494" font-size="7" class="svg-label">learn from</text>
+          <text x="170" y="165" text-anchor="middle" fill="#8A8494" font-size="7" class="svg-label">errors</text>
+        </g>
+
+        <!-- ===== TREE 2 ===== -->
+        <g style="animation: treeGrow 0.5s ease-out 2s both;">
+          <rect x="200" y="65" rx="6" width="100" height="24" fill="url(#gTree2)"/>
+          <text x="250" y="81" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" class="svg-label">Tree 2</text>
+          <circle cx="250" cy="110" r="10" fill="#F3E8FF" stroke="#5C00B5" stroke-width="1.5"/>
+          <text x="250" y="114" text-anchor="middle" fill="#5C00B5" font-size="7" font-weight="700" class="svg-label">split</text>
+          <line x1="240" y1="118" x2="220" y2="140" stroke="#5C00B5" stroke-width="1.5"/>
+          <line x1="260" y1="118" x2="280" y2="140" stroke="#5C00B5" stroke-width="1.5"/>
+          <rect x="205" y="142" rx="4" width="30" height="18" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="220" y="155" text-anchor="middle" fill="#268500" font-size="7" font-weight="700" class="svg-label">−0.1</text>
+          <rect x="265" y="142" rx="4" width="30" height="18" fill="#F3E8FF" stroke="#5C00B5" stroke-width="1"/>
+          <text x="280" y="155" text-anchor="middle" fill="#5C00B5" font-size="7" font-weight="700" class="svg-label">+0.2</text>
+          <text x="250" y="180" text-anchor="middle" fill="#504A5C" font-size="8" class="svg-label">Corrects Tree 1 errors</text>
+        </g>
+
+        <!-- Residual bar 2 (medium) -->
+        <g style="animation: treeGrow 0.5s ease-out 2.5s both;">
+          <rect x="225" y="210" rx="3" width="50" height="25" fill="url(#gResid)" opacity="0.5"/>
+          <text x="250" y="227" text-anchor="middle" fill="#fff" font-size="7" font-weight="700" class="svg-label">Error</text>
+          <text x="250" y="250" text-anchor="middle" fill="#DA3A16" font-size="8" font-weight="600" class="svg-label">Smaller residuals</text>
+        </g>
+
+        <!-- Arrow 2→3 -->
+        <g style="animation: fadeInUp 0.4s ease-out 2.8s both;">
+          <line x1="315" y1="130" x2="365" y2="130" stroke="#5C00B5" stroke-width="2" marker-end="url(#arrowGBM)"/>
+          <text x="340" y="120" text-anchor="middle" fill="#5C00B5" font-size="8" font-weight="600" class="svg-label">× η</text>
+          <text x="340" y="155" text-anchor="middle" fill="#8A8494" font-size="7" class="svg-label">learn from</text>
+          <text x="340" y="165" text-anchor="middle" fill="#8A8494" font-size="7" class="svg-label">errors</text>
+        </g>
+
+        <!-- ===== TREE 3 ===== -->
+        <g style="animation: treeGrow 0.5s ease-out 3.2s both;">
+          <rect x="370" y="65" rx="6" width="100" height="24" fill="url(#gTree3)"/>
+          <text x="420" y="81" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" class="svg-label">Tree 3</text>
+          <circle cx="420" cy="110" r="10" fill="#F3E8FF" stroke="#23004C" stroke-width="1.5"/>
+          <text x="420" y="114" text-anchor="middle" fill="#23004C" font-size="7" font-weight="700" class="svg-label">split</text>
+          <line x1="410" y1="118" x2="390" y2="140" stroke="#23004C" stroke-width="1.5"/>
+          <line x1="430" y1="118" x2="450" y2="140" stroke="#23004C" stroke-width="1.5"/>
+          <rect x="375" y="142" rx="4" width="30" height="18" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="390" y="155" text-anchor="middle" fill="#268500" font-size="7" font-weight="700" class="svg-label">+0.05</text>
+          <rect x="435" y="142" rx="4" width="30" height="18" fill="#F3E8FF" stroke="#23004C" stroke-width="1"/>
+          <text x="450" y="155" text-anchor="middle" fill="#23004C" font-size="7" font-weight="700" class="svg-label">−0.03</text>
+          <text x="420" y="180" text-anchor="middle" fill="#504A5C" font-size="8" class="svg-label">Corrects Tree 2 errors</text>
+        </g>
+
+        <!-- Residual bar 3 (tiny) -->
+        <g style="animation: treeGrow 0.5s ease-out 3.7s both;">
+          <rect x="395" y="222" rx="3" width="50" height="10" fill="url(#gResid)" opacity="0.3"/>
+          <text x="420" y="250" text-anchor="middle" fill="#DA3A16" font-size="8" font-weight="600" class="svg-label">Tiny residuals</text>
+        </g>
+
+        <!-- Dots to N -->
+        <g style="animation: fadeInUp 0.4s ease-out 4s both;">
+          <text x="510" y="110" fill="#8A8494" font-size="20" font-weight="700" class="svg-label">...</text>
+          <text x="510" y="140" text-anchor="middle" fill="#8A8494" font-size="8" class="svg-label">up to n_estimators</text>
+        </g>
+
+        <!-- ===== FINAL ENSEMBLE ===== -->
+        <g style="animation: treeGrow 0.6s ease-out 4.5s both;">
+          <rect x="570" y="55" rx="12" width="310" height="130" fill="#F9F5FF" stroke="#7A00E6" stroke-width="2"/>
+          <text x="725" y="78" text-anchor="middle" fill="#23004C" font-size="11" font-weight="700" class="svg-label">Final Prediction</text>
+
+          <!-- Formula -->
+          <text x="725" y="102" text-anchor="middle" fill="#5C00B5" font-size="10" font-weight="600" class="svg-label">F(x) = Tree₁ + η·Tree₂ + η·Tree₃ + ...</text>
+
+          <!-- Parameter boxes -->
+          <rect x="590" y="115" rx="6" width="90" height="30" fill="#E4F4FA" stroke="#007FAD" stroke-width="1"/>
+          <text x="635" y="128" text-anchor="middle" fill="#007FAD" font-size="8" font-weight="700" class="svg-label">n_estimators</text>
+          <text x="635" y="140" text-anchor="middle" fill="#005F82" font-size="7" class="svg-label"># of trees (50)</text>
+
+          <rect x="690" y="115" rx="6" width="90" height="30" fill="#E4F4FA" stroke="#007FAD" stroke-width="1"/>
+          <text x="735" y="128" text-anchor="middle" fill="#007FAD" font-size="8" font-weight="700" class="svg-label">max_depth</text>
+          <text x="735" y="140" text-anchor="middle" fill="#005F82" font-size="7" class="svg-label">tree depth (2)</text>
+
+          <rect x="790" y="115" rx="6" width="80" height="30" fill="#E4F4FA" stroke="#007FAD" stroke-width="1"/>
+          <text x="830" y="128" text-anchor="middle" fill="#007FAD" font-size="8" font-weight="700" class="svg-label">η (learn rate)</text>
+          <text x="830" y="140" text-anchor="middle" fill="#005F82" font-size="7" class="svg-label">shrinkage (0.1)</text>
+
+          <!-- Output -->
+          <text x="725" y="172" text-anchor="middle" fill="#504A5C" font-size="9" class="svg-label">→ σ(F(x)) = Propensity Score</text>
+        </g>
+
+        <!-- Why GBM annotation -->
+        <g style="animation: scaleIn 0.4s ease-out 5.2s both;">
+          <rect x="610" y="200" rx="8" width="230" height="46" fill="#E8F5E3" stroke="#268500" stroke-width="1.5"/>
+          <text x="725" y="218" text-anchor="middle" fill="#268500" font-size="9" font-weight="700" class="svg-label">Why GBM for propensity scores?</text>
+          <text x="725" y="234" text-anchor="middle" fill="#1B6000" font-size="8" class="svg-label">Captures non-linear covariate interactions</text>
+          <text x="725" y="244" text-anchor="middle" fill="#1B6000" font-size="8" class="svg-label">that logistic regression cannot model</text>
+        </g>
+
+        <!-- Arrow marker -->
+        <defs>
+          <marker id="arrowGBM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7A00E6"/></marker>
+        </defs>
+
+        <!-- Error reduction annotation -->
+        <g style="animation: fadeInUp 0.4s ease-out 4.2s both;">
+          <line x1="80" y1="290" x2="470" y2="290" stroke="#C9C4D0" stroke-width="1"/>
+          <rect x="55" y="280" width="50" height="20" fill="url(#gResid)" opacity="0.7" rx="2"/>
+          <rect x="225" y="285" width="50" height="10" fill="url(#gResid)" opacity="0.5" rx="2"/>
+          <rect x="395" y="288" width="50" height="4" fill="url(#gResid)" opacity="0.3" rx="1"/>
+          <text x="270" y="318" text-anchor="middle" fill="#8A8494" font-size="9" class="svg-label">Prediction errors shrink with each tree →</text>
+        </g>
+      </svg>
+    </div>
+    <p class="small">GBM builds trees sequentially — each new tree is trained on the <em>residuals</em> (errors) from the previous ensemble. The learning rate (η) shrinks each tree's contribution to prevent overfitting. After 50 trees of depth 2, the ensemble's combined prediction is passed through a sigmoid to produce a propensity score. The selected model uses <strong>GBM (50/2/0.1)</strong> = 50 trees, depth 2, learning rate 0.1.</p>
+
+    <div class="callout c-purple"><strong>Total: 4 + 18 = 22 PS models.</strong> All fitted on 4,829 HCPs with 11 covariates predicting treatment status.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">AUC — Diagnostic, NOT Selection Criterion</div>
+    <div class="term"><span class="abbr">ROC Curve</span> — <strong>Receiver Operating Characteristic.</strong> A plot of the true positive rate (sensitivity) versus the false positive rate (1 − specificity) at every possible classification threshold. It shows how well the model distinguishes treated from control HCPs across all decision boundaries.</div>
+    <div class="term"><span class="abbr">AUC</span> — <strong>Area Under the ROC Curve.</strong> Summarizes the ROC curve as a single number between 0 and 1. AUC = 0.5 means the model is no better than random guessing. AUC = 1.0 means perfect discrimination. For PSM, moderate AUC (0.6–0.8) is actually ideal — very high AUC means the treated and control groups are so different that matching will struggle to find comparable pairs. <strong>AUC is reported for information — it never drives model selection.</strong></div>
+    <div class="term"><strong>5-Fold Cross-Validated AUC</strong> — Split data into 5 folds; each takes a turn as test set. Average of 5 test AUCs gives an honest estimate. In-sample AUC inflates GBM performance. We always report CV AUC as primary.</div>
+    <div class="stats">
+      <div class="stat"><div class="n" style="font-size:22px;">0.739</div><div class="l">AUC (5-fold CV) ± 0.014</div></div>
+      <div class="stat"><div class="n" style="font-size:22px;">0.746</div><div class="l">AUC (in-sample)</div></div>
+      <div class="stat"><div class="n" style="font-size:22px;">0.007</div><div class="l">Gap (minimal overfitting)</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">All 22 Models — AUC vs. Matched Pairs</div>
+    <div class="chart-wrap"><canvas id="chartScatter"></canvas></div>
+    <p class="small">Purple star = selected model (GBM 50/2/0.1). Teal = balanced models. Red = failed balance. The selected model has moderate AUC but the most pairs — the right tradeoff.</p>
+  </div>
+</div>
+
+<!-- ==================== LOGISTIC VS GBM ==================== -->
+<div class="section" id="logistic-vs-gbm">
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Logistic Regression vs. GBM — Head to Head</div></div>
+  <div class="card">
+    <p>We swept both model families to let the data decide which produces better balance and more matched pairs. Here is a structured comparison of the two approaches for propensity score estimation, followed by why GBM won in this analysis.</p>
+
+    <!-- ===== LOGISTIC vs GBM COMPARISON SVG ===== -->
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+        <text x="450" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">Two Approaches to Estimating P(Treatment | X)</text>
+
+        <!-- Logistic column -->
+        <rect x="40" y="40" rx="12" width="380" height="320" fill="#E4F4FA" stroke="#007FAD" stroke-width="1.5" style="animation: fadeInUp 0.5s ease-out 0.2s both;"/>
+        <rect x="40" y="40" rx="12" ry="12" width="380" height="36" fill="#007FAD"/>
+        <text x="230" y="64" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" class="svg-label">Logistic Regression</text>
+
+        <!-- GBM column -->
+        <rect x="480" y="40" rx="12" width="380" height="320" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1.5" style="animation: fadeInUp 0.5s ease-out 0.4s both;"/>
+        <rect x="480" y="40" rx="12" ry="12" width="380" height="36" fill="#7A00E6"/>
+        <text x="670" y="64" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" class="svg-label">Gradient Boosting (GBM)</text>
+
+        <!-- VS badge -->
+        <circle cx="450" cy="58" r="18" fill="#23004C" style="animation: scaleIn 0.3s ease-out 0.6s both;"/>
+        <text x="450" y="63" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.2s ease-out 0.8s both;">VS</text>
+
+        <!-- Logistic details -->
+        <text x="70" y="100" fill="#005F82" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.8s both;">How it works</text>
+        <text x="70" y="116" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.9s both;">Fits a single sigmoid boundary in</text>
+        <text x="70" y="128" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.95s both;">covariate space. Linear in log-odds.</text>
+
+        <text x="70" y="150" fill="#005F82" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1s both;">Regularization</text>
+        <text x="70" y="166" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.05s both;">L2 penalty via C parameter.</text>
+        <text x="70" y="178" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.1s both;">Small C → stronger penalty → simpler.</text>
+
+        <text x="70" y="200" fill="#268500" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.15s both;">Strengths</text>
+        <text x="70" y="216" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.2s both;">✓ Interpretable coefficients (β values)</text>
+        <text x="70" y="230" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.25s both;">✓ Fast to fit (4 models in seconds)</text>
+        <text x="70" y="244" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.3s both;">✓ No overfitting risk with few covariates</text>
+        <text x="70" y="258" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.35s both;">✓ Well-understood statistical properties</text>
+
+        <text x="70" y="280" fill="#DA3A16" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.4s both;">Weaknesses</text>
+        <text x="70" y="296" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.45s both;">✗ Cannot capture interactions automatically</text>
+        <text x="70" y="310" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.5s both;">✗ Assumes linear relationship in log-odds</text>
+        <text x="70" y="324" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.55s both;">✗ Needs manual feature engineering</text>
+
+        <rect x="70" y="336" rx="4" width="80" height="16" fill="#E4F4FA" stroke="#007FAD" stroke-width="1"/>
+        <text x="110" y="348" text-anchor="middle" fill="#007FAD" font-size="8" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.6s both;">4 models swept</text>
+
+        <!-- GBM details -->
+        <text x="510" y="100" fill="#5C00B5" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.8s both;">How it works</text>
+        <text x="510" y="116" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.9s both;">Builds sequential trees, each correcting</text>
+        <text x="510" y="128" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 0.95s both;">the previous one's residuals (errors).</text>
+
+        <text x="510" y="150" fill="#5C00B5" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1s both;">Regularization</text>
+        <text x="510" y="166" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.05s both;">Three controls: learning_rate (shrinkage),</text>
+        <text x="510" y="178" fill="#504A5C" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.1s both;">max_depth (complexity), n_estimators (count).</text>
+
+        <text x="510" y="200" fill="#268500" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.15s both;">Strengths</text>
+        <text x="510" y="216" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.2s both;">✓ Captures non-linear relationships</text>
+        <text x="510" y="230" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.25s both;">✓ Auto-detects covariate interactions</text>
+        <text x="510" y="244" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.3s both;">✓ Robust to outliers and scaling</text>
+        <text x="510" y="258" fill="#1B6000" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.35s both;">✓ Often better balance in practice</text>
+
+        <text x="510" y="280" fill="#DA3A16" font-size="10" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.4s both;">Weaknesses</text>
+        <text x="510" y="296" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.45s both;">✗ Black box — no interpretable coefficients</text>
+        <text x="510" y="310" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.5s both;">✗ More hyperparameters to tune</text>
+        <text x="510" y="324" fill="#DA3A16" font-size="9" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.55s both;">✗ Risk of overfitting if over-tuned</text>
+
+        <rect x="510" y="336" rx="4" width="90" height="16" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1"/>
+        <text x="555" y="348" text-anchor="middle" fill="#7A00E6" font-size="8" font-weight="700" class="svg-label" style="animation: fadeNum 0.3s ease-out 1.6s both;">18 models swept</text>
+      </svg>
+    </div>
+
+    <div class="callout c-green"><strong>Why GBM won in this analysis:</strong> GBM (50/2/0.1) produced the most matched pairs (1,524) with all covariates passing balance (max|SMD| = 0.065). The best logistic model (C=10) matched 1,507 pairs — comparable, but its maximum SMD was slightly higher. The key advantage is GBM's ability to model the non-linear relationship between segment, call volume, and treatment probability without manual interaction terms. However, the close performance of both families is itself a robustness finding — if both model types produce similar estimates, the result is less sensitive to model specification.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Regularization: The Same Idea, Two Implementations</div>
+    <p><strong>Regularization</strong> is any technique that constrains a model to prevent it from fitting noise in the training data (overfitting). Both logistic regression and GBM use regularization, but implement it differently.</p>
+    <p>In <strong>logistic regression</strong>, regularization is an <strong>L2 penalty</strong> (also called ridge penalty) that adds a cost proportional to the square of the coefficients. The hyperparameter <strong>C</strong> is the <em>inverse</em> of the penalty strength: C=0.01 means heavy penalty (simpler model), C=10 means light penalty (more flexible). The effect is to shrink all coefficients toward zero, preventing any single covariate from dominating.</p>
+    <p>In <strong>GBM</strong>, regularization comes from three mechanisms working together: <strong>learning_rate</strong> (η, also called shrinkage) scales each tree's contribution down — at η=0.1, each tree only contributes 10% of its full prediction, requiring many trees to build up the final answer. <strong>max_depth</strong> limits how complex each individual tree can be — depth 2 means each tree can make at most 2 sequential splits, capturing only simple interactions. <strong>n_estimators</strong> controls how many trees are built — stopping early prevents the ensemble from memorizing training patterns. Together, these three knobs control the bias-variance tradeoff.</p>
+  </div>
+</div>
+
+<!-- ==================== MODEL SELECTION ==================== -->
+<div class="section" id="selection">
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">Model Selection (3-Step Multi-Criteria)</div></div>
+  <div class="card">
+    <div class="card-title">Selection Logic</div>
+    <p>AUC alone is insufficient. A high-AUC model may produce poor balance or few pairs. Our selection uses three sequential criteria:</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-title">Balance Filter</div>
+        <div class="step-desc">All 11 covariates must have |SMD| < 0.1 post-match. <strong>17 of 22 pass.</strong></div>
+        <svg class="step-arrow" viewBox="0 0 24 24" fill="none"><path d="M8 4l8 8-8 8" stroke="var(--purple)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-title">Max Pairs</div>
+        <div class="step-desc">Among passing models, pick the one with most matched pairs (power). <strong>GBM (50/2/0.1): 1,524 pairs.</strong></div>
+        <svg class="step-arrow" viewBox="0 0 24 24" fill="none"><path d="M8 4l8 8-8 8" stroke="var(--purple)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-title">Tiebreaker</div>
+        <div class="step-desc">If tied on pairs, lower max|SMD| wins. <strong>No tie — GBM won outright.</strong></div>
+      </div>
+    </div>
+    <div class="callout c-green"><strong>Why not select by AUC?</strong> AUC measures discrimination. PSM needs <em>balance</em>. A model with AUC=0.78 but imbalanced covariates is worse than AUC=0.74 with perfect balance. AUC confirms the PS model is learning — it never picks the winner.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Top 5 Models</div>
+    <table>
+      <thead><tr><th>#</th><th>Model</th><th>AUC (CV)</th><th>Max |SMD|</th><th>Pairs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>1</td><td>GBM (50/2/0.1)</td><td>0.739</td><td>0.065</td><td>1,524</td><td><span class="badge b-pass">SELECTED</span></td></tr>
+        <tr><td>2</td><td>GBM (100/2/0.05)</td><td>0.739</td><td>0.078</td><td>1,518</td><td><span class="badge b-pass">PASS</span></td></tr>
+        <tr><td>3</td><td>Logistic C=10</td><td>0.735</td><td>0.069</td><td>1,507</td><td><span class="badge b-pass">PASS</span></td></tr>
+        <tr><td>4</td><td>Logistic C=1.0</td><td>0.735</td><td>0.080</td><td>1,506</td><td><span class="badge b-pass">PASS</span></td></tr>
+        <tr><td>5</td><td>Logistic C=0.1</td><td>0.735</td><td>0.084</td><td>1,504</td><td><span class="badge b-pass">PASS</span></td></tr>
+      </tbody>
+    </table>
+    <p class="small">GBM (50/2/0.05) at rank 18 had the MOST pairs (1,545) but failed balance (max|SMD|=0.182). Balance must come first.</p>
+  </div>
+</div>
+
+<!-- ==================== BALANCE ==================== -->
+<div class="section" id="balance">
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">Matching &amp; Balance Diagnostics</div></div>
+  <div class="card">
+    <div class="card-title">NN 1:1 Matching (Without Replacement)</div>
+    <div class="term"><strong>Nearest-Neighbor 1:1 Matching</strong> — For each treated HCP, find the control with the closest propensity score."Without replacement" = each control used once. A <strong>caliper</strong> (0.2 × SD(PS), Rosenbaum-Rubin default) prevents poor matches.</div>
+    <div class="stats">
+      <div class="stat"><div class="n">1,524</div><div class="l">Matched Pairs</div></div>
+      <div class="stat"><div class="n">57.7%</div><div class="l">Match Rate</div></div>
+      <div class="stat"><div class="n">0.065</div><div class="l">Max |SMD|</div></div>
+      <div class="stat"><div class="n">11/11</div><div class="l">Balanced</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Pre-Match vs. Post-Match Balance</div>
+    <div class="chart-wrap" style="max-height:440px;"><canvas id="chartBalance"></canvas></div>
+    <p class="small">Every covariate drops below |SMD| = 0.1. The worst pre-match offenders (call volume 0.627, RTE 0.501, seg_C −0.445) are now well-balanced.</p>
+  </div>
+</div>
+
+<!-- ==================== METHODS COMPARED ==================== -->
+<div class="section" id="methods-compared">
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">Estimation Methods — Matching vs. Weighting vs. Stratification</div></div>
+  <div class="card">
+    <p>Once we have propensity scores, there are three fundamentally different strategies for using them to estimate causal effects. Each has distinct mechanics, assumptions, and tradeoffs. We use all three as a robustness check — if they agree, the conclusion is not an artifact of any single method.</p>
+
+    <!-- ===== THREE STRATEGIES ANIMATED SVG ===== -->
+    <div class="svg-diagram">
+      <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+        <text x="450" y="22" text-anchor="middle" fill="#23004C" font-size="13" font-weight="700" class="svg-label">Three Strategies for Using Propensity Scores</text>
+
+        <!-- MATCHING column -->
+        <g style="animation: fadeInUp 0.5s ease-out 0.3s both;">
+          <rect x="20" y="40" rx="10" width="270" height="340" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1.5"/>
+          <rect x="20" y="40" rx="10" ry="10" width="270" height="32" fill="#7A00E6"/>
+          <text x="155" y="62" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" class="svg-label">MATCHING</text>
+
+          <!-- Matching visual: pairs of dots -->
+          <circle cx="70" cy="110" r="7" fill="#7A00E6" opacity="0.8"/><circle cx="95" cy="110" r="7" fill="#007FAD" opacity="0.8"/>
+          <line x1="77" y1="110" x2="88" y2="110" stroke="#268500" stroke-width="2"/>
+          <circle cx="140" cy="110" r="7" fill="#7A00E6" opacity="0.8"/><circle cx="165" cy="110" r="7" fill="#007FAD" opacity="0.8"/>
+          <line x1="147" y1="110" x2="158" y2="110" stroke="#268500" stroke-width="2"/>
+          <circle cx="210" cy="110" r="7" fill="#7A00E6" opacity="0.8"/><circle cx="235" cy="110" r="7" fill="#007FAD" opacity="0.8"/>
+          <line x1="217" y1="110" x2="228" y2="110" stroke="#268500" stroke-width="2"/>
+          <!-- Unmatched faded -->
+          <circle cx="120" cy="140" r="4" fill="#7A00E6" opacity="0.15"/>
+          <circle cx="200" cy="140" r="4" fill="#007FAD" opacity="0.15"/>
+
+          <text x="40" y="172" fill="#504A5C" font-size="9" class="svg-label"><tspan font-weight="700">How:</tspan> Pair each treated unit with the</text>
+          <text x="40" y="184" fill="#504A5C" font-size="9" class="svg-label">closest control on PS. Unmatched</text>
+          <text x="40" y="196" fill="#504A5C" font-size="9" class="svg-label">units are dropped from analysis.</text>
+
+          <text x="40" y="218" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Intuitive</tspan> — paired comparison</text>
+          <text x="40" y="232" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Transparent</tspan> — can inspect pairs</text>
+          <text x="40" y="246" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ No extreme weights</tspan></text>
+
+          <text x="40" y="268" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Drops unmatched</tspan> — loses data</text>
+          <text x="40" y="282" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Seed-dependent</tspan> (tie-breaking)</text>
+          <text x="40" y="296" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ With-replacement</tspan> can reuse</text>
+          <text x="40" y="308" fill="#DA3A16" font-size="9" class="svg-label">   controls → inflated precision</text>
+
+          <rect x="40" y="322" rx="6" width="230" height="20" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="155" y="336" text-anchor="middle" fill="#268500" font-size="8" font-weight="700" class="svg-label">ATT = mean(Y_T − Y_C) in pairs</text>
+
+          <rect x="40" y="350" rx="4" width="100" height="16" fill="#F3E8FF" stroke="#7A00E6" stroke-width="1"/>
+          <text x="90" y="362" text-anchor="middle" fill="#7A00E6" font-size="7" font-weight="700" class="svg-label">NN 1:1 → 1,524 pairs</text>
+        </g>
+
+        <!-- WEIGHTING column -->
+        <g style="animation: fadeInUp 0.5s ease-out 0.6s both;">
+          <rect x="315" y="40" rx="10" width="270" height="340" fill="#E4F4FA" stroke="#007FAD" stroke-width="1.5"/>
+          <rect x="315" y="40" rx="10" ry="10" width="270" height="32" fill="#007FAD"/>
+          <text x="450" y="62" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" class="svg-label">WEIGHTING (IPW / AIPW)</text>
+
+          <!-- Weighting visual: dots with different sizes -->
+          <circle cx="350" cy="105" r="5" fill="#007FAD" opacity="0.3"/>
+          <circle cx="380" cy="100" r="9" fill="#007FAD" opacity="0.6"/>
+          <circle cx="420" cy="108" r="12" fill="#007FAD" opacity="0.8"/>
+          <circle cx="465" cy="102" r="7" fill="#007FAD" opacity="0.5"/>
+          <circle cx="500" cy="110" r="10" fill="#007FAD" opacity="0.7"/>
+          <circle cx="540" cy="105" r="4" fill="#007FAD" opacity="0.25"/>
+          <!-- Treated (all same size) -->
+          <circle cx="365" cy="135" r="6" fill="#7A00E6" opacity="0.7"/>
+          <circle cx="400" cy="135" r="6" fill="#7A00E6" opacity="0.7"/>
+          <circle cx="435" cy="135" r="6" fill="#7A00E6" opacity="0.7"/>
+          <circle cx="470" cy="135" r="6" fill="#7A00E6" opacity="0.7"/>
+          <circle cx="505" cy="135" r="6" fill="#7A00E6" opacity="0.7"/>
+
+          <text x="335" y="168" fill="#504A5C" font-size="9" class="svg-label"><tspan font-weight="700">How:</tspan> Keep ALL units. Give each control</text>
+          <text x="335" y="180" fill="#504A5C" font-size="9" class="svg-label">a weight = PS/(1−PS). Controls similar</text>
+          <text x="335" y="192" fill="#504A5C" font-size="9" class="svg-label">to treated get high weight. No data lost.</text>
+
+          <text x="335" y="214" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Uses full sample</tspan> (n=4,829)</text>
+          <text x="335" y="228" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Deterministic</tspan> (no seed variation)</text>
+          <text x="335" y="242" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ AIPW is doubly robust</tspan></text>
+
+          <text x="335" y="264" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Extreme PS → extreme weights</tspan></text>
+          <text x="335" y="278" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ IPW assumes correct PS model</tspan></text>
+          <text x="335" y="292" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Less transparent</tspan> than pairs</text>
+
+          <rect x="335" y="310" rx="6" width="230" height="34" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="450" y="324" text-anchor="middle" fill="#268500" font-size="8" font-weight="700" class="svg-label">IPW: ATT = Σw·Y_C reweighted</text>
+          <text x="450" y="336" text-anchor="middle" fill="#268500" font-size="8" font-weight="700" class="svg-label">AIPW: IPW + outcome model correction</text>
+
+          <rect x="335" y="352" rx="4" width="110" height="16" fill="#E4F4FA" stroke="#007FAD" stroke-width="1"/>
+          <text x="390" y="364" text-anchor="middle" fill="#007FAD" font-size="7" font-weight="700" class="svg-label">Max weight: 5.11</text>
+        </g>
+
+        <!-- STRATIFICATION column -->
+        <g style="animation: fadeInUp 0.5s ease-out 0.9s both;">
+          <rect x="610" y="40" rx="10" width="270" height="340" fill="#FFF8E1" stroke="#E65100" stroke-width="1.5"/>
+          <rect x="610" y="40" rx="10" ry="10" width="270" height="32" fill="#E65100"/>
+          <text x="745" y="62" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" class="svg-label">STRATIFICATION</text>
+
+          <!-- Strata visual: bins -->
+          <rect x="635" y="92" rx="3" width="40" height="50" fill="#E65100" opacity="0.1" stroke="#E65100" stroke-width="1"/>
+          <rect x="680" y="92" rx="3" width="40" height="50" fill="#E65100" opacity="0.2" stroke="#E65100" stroke-width="1"/>
+          <rect x="725" y="92" rx="3" width="40" height="50" fill="#E65100" opacity="0.3" stroke="#E65100" stroke-width="1"/>
+          <rect x="770" y="92" rx="3" width="40" height="50" fill="#E65100" opacity="0.4" stroke="#E65100" stroke-width="1"/>
+          <rect x="815" y="92" rx="3" width="40" height="50" fill="#E65100" opacity="0.5" stroke="#E65100" stroke-width="1"/>
+          <text x="655" y="113" text-anchor="middle" fill="#E65100" font-size="7" class="svg-label">Bin 1</text>
+          <text x="700" y="113" text-anchor="middle" fill="#E65100" font-size="7" class="svg-label">Bin 2</text>
+          <text x="745" y="113" text-anchor="middle" fill="#E65100" font-size="7" class="svg-label">Bin 3</text>
+          <text x="790" y="113" text-anchor="middle" fill="#E65100" font-size="7" class="svg-label">...</text>
+          <text x="835" y="113" text-anchor="middle" fill="#E65100" font-size="7" class="svg-label">Bin K</text>
+          <!-- Dots inside bins -->
+          <circle cx="645" cy="128" r="3" fill="#7A00E6"/><circle cx="660" cy="128" r="3" fill="#007FAD"/>
+          <circle cx="690" cy="128" r="3" fill="#7A00E6"/><circle cx="705" cy="128" r="3" fill="#007FAD"/>
+          <circle cx="735" cy="128" r="3" fill="#7A00E6"/><circle cx="750" cy="128" r="3" fill="#007FAD"/>
+
+          <text x="630" y="168" fill="#504A5C" font-size="9" class="svg-label"><tspan font-weight="700">How:</tspan> Divide PS range into K equal-</text>
+          <text x="630" y="180" fill="#504A5C" font-size="9" class="svg-label">width bins. Within each bin, treated</text>
+          <text x="630" y="192" fill="#504A5C" font-size="9" class="svg-label">and control have similar PS. Estimate</text>
+          <text x="630" y="204" fill="#504A5C" font-size="9" class="svg-label">ATT within each, then weighted avg.</text>
+
+          <text x="630" y="226" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Uses full sample</tspan></text>
+          <text x="630" y="240" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Deterministic</tspan></text>
+          <text x="630" y="254" fill="#268500" font-size="9" class="svg-label"><tspan font-weight="700">✓ Simple to implement</tspan></text>
+
+          <text x="630" y="276" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Residual bias</tspan> within strata</text>
+          <text x="630" y="290" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ Fewer strata → more bias</tspan></text>
+          <text x="630" y="304" fill="#DA3A16" font-size="9" class="svg-label"><tspan font-weight="700">✗ More strata → sparse bins</tspan></text>
+
+          <rect x="630" y="316" rx="6" width="230" height="20" fill="#E8F5E3" stroke="#268500" stroke-width="1"/>
+          <text x="745" y="330" text-anchor="middle" fill="#268500" font-size="8" font-weight="700" class="svg-label">ATT = Σ(n_k/N)·ATT_k per stratum</text>
+
+          <rect x="630" y="344" rx="4" width="100" height="16" fill="#FFF8E1" stroke="#E65100" stroke-width="1"/>
+          <text x="680" y="356" text-anchor="middle" fill="#E65100" font-size="7" font-weight="700" class="svg-label">5 or 10 strata</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Detailed Method Definitions</div>
+
+    <h3>Nearest Neighbor 1:1 Matching</h3>
+    <div class="term"><strong>NN 1:1 (without replacement)</strong> — For each treated HCP, find the single control HCP with the closest propensity score."Without replacement" means each control can only be used once — once matched, it is removed from the pool. A <strong>caliper</strong> of 0.2 × SD(PS) prevents poor matches: if no control falls within this distance, the treated HCP goes unmatched. The ATT is simply the mean difference in outcomes between treated and their matched controls: <strong>ATT = (1/N) Σ(Y_treated_i − Y_control_i)</strong>.</div>
+    <div class="term"><span class="abbr">Caliper</span> — A maximum distance threshold for matching. Set to <strong>0.2 × standard deviation of propensity scores</strong>, a rule-of-thumb from Rosenbaum and Rubin (1985) that removes approximately 98% of bias from a normally distributed confounder. Too tight a caliper → fewer matches (less power). Too loose → poor-quality matches (more bias). The 0.2×SD default is the widely accepted balance point.</div>
+    <div class="term"><strong>NN 1:1 (with replacement)</strong> — Same algorithm, but each control can be matched to multiple treated HCPs. This reduces bias (the best match is always available) but inflates precision — in our data, only 293 unique controls were used for 2,639 treated HCPs, meaning some controls were reused 9+ times. This violates the independence assumption for standard error estimation and is why we <strong>flag</strong> this estimator rather than relying on it.</div>
+
+    <h3>Inverse Probability Weighting (IPW)</h3>
+    <div class="term"><span class="abbr">IPW</span> — <strong>Inverse Probability Weighting.</strong> Instead of matching, IPW keeps every HCP and assigns weights. For estimating the <strong>ATT</strong>, treated HCPs get weight = 1 (they are the reference population), and control HCPs get weight = <strong>PS / (1 − PS)</strong>, where PS is their propensity score. Controls that look most like the treated group (high PS) get the highest weight. The weighted outcome mean of controls is then compared to the treated mean. In our data, the maximum weight was 5.11 and mean was 1.13 — no extreme weights, indicating good overlap.</div>
+    <div class="callout c-orange"><strong>When IPW breaks:</strong> If any control HCP has a propensity score very close to 1, the weight PS/(1−PS) explodes. For example, PS=0.99 produces a weight of 99. A single HCP with an extreme weight can dominate the entire estimate. Weight truncation (capping weights at a threshold) is one mitigation, but it introduces bias. Our maximum weight of 5.11 indicates this is not a concern in our data.</div>
+
+    <h3>Augmented IPW (AIPW) — Primary Estimator</h3>
+    <div class="term"><span class="abbr">AIPW</span> — <strong>Augmented Inverse Probability Weighting.</strong> Combines IPW with an <strong>outcome model</strong> (a separate logistic regression that predicts the outcome Y given covariates X). The"augmentation" adds a bias-correction term: if the PS model is slightly wrong, the outcome model compensates, and vice versa. This is the <strong>doubly robust</strong> property — the estimate is consistent (converges to truth) if <em>either</em> the PS model or the outcome model is correctly specified. You do not need both to be right, just one.</div>
+    <div class="term"><strong>Outcome Model</strong> — A separate logistic regression (distinct from the PS model) that predicts the probability of the outcome (initiation) given the 11 covariates. In AIPW, this model is used to construct predicted outcomes under treatment and control for each HCP, which serve as the"augmentation" that corrects for any residual imbalance the PS weights did not fully address.</div>
+    <div class="term"><strong>Doubly Robust</strong> — A statistical property meaning: the estimator gives the correct answer if <em>at least one</em> of two component models is correctly specified. For AIPW, the two models are: (1) the propensity score model (probability of treatment), and (2) the outcome model (probability of initiation). In practice, neither model is perfect — but doubly robust estimators provide a"safety net" by allowing one model to compensate for the other's errors. This is why AIPW is our <strong>primary estimator</strong>.</div>
+
+    <h3>Stratification</h3>
+    <div class="term"><strong>Stratification (5 strata, Cochran default)</strong> — Proposed by <strong>Cochran (1968)</strong>, who showed that dividing a continuous variable into 5 equal-frequency bins removes approximately 90% of bias. The PS range is split into 5 bins; within each bin, treated and control HCPs have similar propensity scores. The ATT within each bin is the simple mean difference, and the overall ATT is the weighted average across bins, with weights proportional to the number of treated HCPs in each bin: <strong>ATT = Σ(n_k/N_treated) × ATT_k</strong>.</div>
+    <div class="term"><strong>Fine Stratification (10 strata)</strong> — Same approach but with 10 bins instead of 5. More strata reduces <em>within-stratum bias</em> (HCPs within each bin are more similar) but risks <em>sparse strata</em> (some bins may have very few treated or control HCPs, producing noisy estimates). This is a standard bias-variance tradeoff. With 4,829 HCPs and 10 bins, we average ~483 per bin — sufficient to avoid sparsity.</div>
+    <div class="term"><strong>Full Matching</strong> (not used in this analysis) — An algorithm that creates matched sets with variable ratios (1:many or many:1), minimizing total PS distance across the sample. Unlike stratification, which uses fixed bin widths, full matching optimizes the grouping. We do not implement full matching; our"Fine Stratification (10 strata)" is sometimes confused with it but uses a simpler equal-width binning approach.</div>
+
+    <h3>Standard Errors and Confidence Intervals</h3>
+    <div class="term"><span class="abbr">Standard Error (SE)</span> — A measure of the precision of our estimate. It quantifies how much the estimated ATT would vary if we drew different samples from the same population. Smaller SE = more precise estimate. SE is used to construct confidence intervals: <strong>CI = ATT ± 1.96 × SE</strong> for a 95% interval under normal approximation.</div>
+    <div class="term"><strong>Bootstrap (1,000 resamples)</strong> — A resampling technique: draw 1,000 random samples <em>with replacement</em> from the original data, each the same size as the original (4,829 HCPs)."With replacement" means the same HCP can appear multiple times in one sample and be absent from another. For each resample, re-estimate the ATT. The standard deviation of these 1,000 ATT estimates <em>is</em> the SE. Bootstrap CIs in our analysis use the <strong>normal approximation</strong>: ATT ± 1.96 × bootstrap SE, rather than percentile-based CIs (which would use the 2.5th and 97.5th percentile of the 1,000 estimates directly). The bootstrap is used for NN matching because analytical SEs for matched pairs are debated in the literature.</div>
+    <div class="term"><strong>Analytical SE</strong> — For IPW and AIPW, standard errors are computed from closed-form formulas (the influence function / sandwich estimator) rather than resampling. These are faster, do not depend on a random seed, and are well-established for these estimators. For stratification, the SE uses the delta method — a technique for approximating the variance of a function of random variables.</div>
+    <div class="term"><strong>Confidence Interval (CI)</strong> — A range [lower, upper] that would contain the true ATT in 95% of repeated experiments. When our 95% CI includes zero (as all of ours do), we cannot reject the null hypothesis that Turing has no effect. A CI is NOT the probability that the true effect is inside the interval — it is a statement about the long-run frequency of correct coverage.</div>
+  </div>
+</div>
+
+<!-- ==================== ESTIMATORS ==================== -->
+<div class="section" id="estimators">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">Treatment Effect Estimation (6 Estimators)</div></div>
+  <div class="card">
+    <p>We estimate the ATT six different ways. If results are similar, the conclusion is not an artifact of one method. Each estimator makes slightly different assumptions — convergence across all of them is much stronger evidence than any single estimate.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">Forest Plot — 5 Reliable Estimators</div>
+    <div class="chart-wrap"><canvas id="chartForest"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Estimator Detail</div>
+    <table>
+      <thead><tr><th>Estimator</th><th>ATT (pp)</th><th>95% CI</th><th>Sample</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>AIPW <span class="badge b-pri">PRIMARY</span></td><td>+0.05</td><td>[−1.67, +1.76]</td><td>Full (4,829)</td><td>Doubly robust, logistic outcome</td></tr>
+        <tr><td>NN 1:1 (no repl.)</td><td>+0.07</td><td>[−1.16, +1.60]</td><td>1,524 pairs</td><td>Bootstrap SE (1,000)</td></tr>
+        <tr><td>Stratification (5)</td><td>+0.23</td><td>[−1.76, +1.94]</td><td>Full (4,829)</td><td>Cochran default bins</td></tr>
+        <tr><td>IPW</td><td>+0.40</td><td>[−1.40, +2.06]</td><td>Full (4,829)</td><td>Max weight 5.11</td></tr>
+        <tr><td>Fine Strat. (10)</td><td>−0.02</td><td>[−2.04, +1.78]</td><td>Full (4,829)</td><td>NOT"Full Matching"</td></tr>
+        <tr><td>NN 1:1 (w/ repl.) <span class="badge b-warn">FLAG</span></td><td>+1.52</td><td>—</td><td>2,639</td><td>Only 293 unique controls</td></tr>
+      </tbody>
+    </table>
+    <div class="callout c-green"><strong>Range: −0.02pp to +0.40pp (0.42pp).</strong> All CIs include zero. Median: +0.07pp.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Seed Stability</div>
+    <div class="chart-wrap" style="max-height:280px;"><canvas id="chartSeeds"></canvas></div>
+    <p class="small">IPW and AIPW are deterministic — identical across seeds. NN varies 0.92pp range (−0.33 to +0.59). Another reason AIPW is primary.</p>
+  </div>
+</div>
+
+<!-- ==================== ROBUSTNESS ==================== -->
+<div class="section" id="robustness">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">Cross-Model Robustness</div></div>
+  <div class="card">
+    <div class="card-title">3 PS Models × 5 Estimators = 15 Combinations</div>
+    <p>If the conclusion changes with a different PS model, the result is fragile.</p>
+    <div class="chart-wrap"><canvas id="chartRobust"></canvas></div>
+    <div class="stats">
+      <div class="stat"><div class="n">+0.02pp</div><div class="l">Grand Mean (15)</div></div>
+      <div class="stat"><div class="n">15/15</div><div class="l">CIs Include Zero</div></div>
+      <div class="stat" style="border-color:var(--green);"><div class="n" style="color:var(--green);font-size:14px;letter-spacing:-0.5px;">CONVERGENT</div><div class="l">Assessment</div></div>
+    </div>
+    <div class="term"><strong>Convergence</strong> — When multiple approaches yield the same conclusion, results are robust to analyst degrees of freedom. The conclusion doesn't change if you change the method.</div>
+  </div>
+</div>
+
+<!-- ==================== SENSITIVITY ==================== -->
+<div class="section" id="sensitivity">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">Sensitivity Analysis</div></div>
+  <div class="card">
+    <div class="card-title">Unmeasured Confounding &amp; the E-value</div>
+    <div class="term"><span class="abbr">Risk Ratio (RR)</span> — The ratio of the outcome probability in one group to another. If treated HCPs have a 5% initiation rate and controls have 3%, the risk ratio is 5/3 = 1.67. A risk ratio of 1 means no difference. Risk ratios are used in the E-value framework because they have a natural scale for quantifying confounder strength.</div>
+    <div class="term"><span class="abbr">E-value</span> — Developed by VanderWeele and Ding (2017), the E-value answers: <em>"How strong would an unmeasured confounder need to be to explain away the observed treatment effect?"</em> Formally, it is the minimum risk ratio that an unmeasured confounder would need to have with <strong>both</strong> the treatment and the outcome — simultaneously — to fully account for the ATT. The formula is: <strong>E-value = RR + √(RR × (RR − 1))</strong>, where RR is the observed risk ratio of the treatment effect. Our E-value of 3.66 means a hidden confounder would need to at least triple the odds of both treatment and outcome. Since our ATT is near zero, the E-value is more of a methodological completeness check than a practical concern — the real question is whether missing covariates could <em>reveal</em> a true effect, which is why ELAAD integration matters.</div>
+    <div class="term"><span class="abbr">SUTVA</span> — <strong>Stable Unit Treatment Value Assumption.</strong> (1) <strong>No interference</strong> between units — one HCP's treatment cannot affect another HCP's outcome. (2) <strong>No hidden treatment variations</strong> — the"treatment" (receiving a Turing suggestion) is the same for every HCP. SUTVA is at risk when multiple HCPs share <strong>HCA</strong>s (Healthcare Accounts), because a rep who changes behavior toward one HCP at an account may change behavior toward all HCPs at that account.</div>
+    <div class="callout c-red"><strong>SUTVA violation biases toward zero.</strong> If control HCPs at the same account as treated HCPs are indirectly"treated" by rep spillover, we are comparing two partially-treated groups — diluting the true effect. HCA-level analysis (pending Ashutosh's linking table) would address this by defining treatment at the account level.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Refutation Tests — Stress-Testing the Estimate</div>
+    <p>Refutation tests deliberately break the analysis in known ways. If the estimate is valid, breaking it should produce predictable results. If it does not, something is wrong with the model or data.</p>
+    <div class="term"><strong>Placebo Treatment Test</strong> — Randomly reassign the treatment label (who received Turing suggestions) while keeping outcomes fixed. Since the"treatment" is now random noise, the estimated ATT should be approximately zero. If it is not, the model is picking up spurious patterns. <strong>Implementation:</strong> Shuffle the treatment column, re-estimate ATT. Our result: −0.027pp ≈ 0. <strong>Verdict: PASS on substance</strong> (near zero), but may show"FAIL" on percentage-change tests when the baseline ATT is itself near zero.</div>
+    <div class="term"><strong>Random Common Cause Test</strong> — Add a random noise variable (drawn from a standard normal distribution) as an additional covariate and re-estimate the ATT. Since the noise variable is independent of everything, it should not change the ATT meaningfully. <strong>A large percentage change (325%) is expected when the baseline ATT is near zero</strong> — even a tiny absolute shift (e.g., 0.05 → 0.21pp) produces a huge percentage change. This is a known limitation of percentage-based refutation metrics at the null.</div>
+    <div class="term"><strong>Data Subset Test</strong> — Randomly draw 80% of the data and re-estimate the ATT. Repeat multiple times. If the estimate is stable (small range across subsets), the result is not driven by outliers or a few influential observations. Our range of 0.014pp across subsets is very tight — confirming a robust null result.</div>
+    <table>
+      <thead><tr><th>Test</th><th>Logic</th><th>Result</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Placebo Treatment</td><td>Random treatment → ATT ≈ 0</td><td>−0.027pp</td><td><span class="badge b-fail">FAIL</span></td></tr>
+        <tr><td>Random Common Cause</td><td>Noise covariate → ATT stable</td><td>325% change</td><td><span class="badge b-fail">FAIL</span></td></tr>
+        <tr><td>Data Subset</td><td>80% subsets → ATT stable</td><td>+0.003pp, range 0.014pp</td><td><span class="badge b-pass">PASS</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout c-orange"><strong>Why do refutation tests"fail" at the null?</strong> Both placebo and random-cause tests use percentage change as the pass/fail criterion. When the baseline ATT is +0.05pp (essentially zero), any perturbation — even one that moves the ATT by a fraction of a percentage point — produces a large <em>percentage</em> change. This is a denominator problem, not a model problem. The absolute values confirm the null is robust: all perturbed ATTs remain near zero.</div>
+  </div>
+</div>
+
+<!-- ==================== SUBGROUPS ==================== -->
+<div class="section" id="subgroups">
+  <div class="section-header"><div class="section-num">13</div><div class="section-title">Subgroup Analysis</div></div>
+  <div class="card">
+    <div class="card-title">By HCP Segment (Exploratory)</div>
+    <div class="chart-wrap" style="max-height:320px;"><canvas id="chartSubgroup"></canvas></div>
+    <div class="term"><strong>Bonferroni correction</strong> — When testing multiple hypotheses simultaneously (here, 3 subgroups), the probability of at least one false positive increases. Bonferroni controls this by dividing the significance threshold (α = 0.05) by the number of tests: 0.05 / 3 = <strong>0.0167</strong>. A subgroup result is"significant" only if its p-value falls below 0.0167 rather than 0.05. This is the most conservative multiple-testing correction — alternatives like Holm-Bonferroni or Benjamini-Hochberg (FDR) are less strict but require more assumptions. We use Bonferroni because with only 3 tests, the conservatism is minimal, and we label all subgroup analyses as <em>exploratory</em> regardless.</div>
+    <table>
+      <thead><tr><th>Segment</th><th>Treated</th><th>Control</th><th>ATT (pp)</th><th>95% CI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong> (highest)</td><td>722</td><td>227</td><td>+0.60</td><td>[−4.65, +5.90]</td></tr>
+        <tr><td><strong>B</strong></td><td>830</td><td>585</td><td>−0.66</td><td>[−3.75, +2.55]</td></tr>
+        <tr><td><strong>C</strong> (lowest)</td><td>1,087</td><td>1,378</td><td>+0.68</td><td>[−1.02, +2.20]</td></tr>
+      </tbody>
+    </table>
+    <p class="small">All CIs include zero. Exploratory only — confirmatory heterogeneity via Causal Forest (next phase).</p>
+  </div>
+</div>
+
+<!-- ==================== INTERPRETATION ==================== -->
+<div class="section" id="interpretation">
+  <div class="section-header"><div class="section-num">14</div><div class="section-title">Interpretation</div></div>
+  <div class="card" style="border: 2px solid var(--purple);">
+    <div class="card-title" style="font-size:17px;">Primary Finding</div>
+    <p style="font-size:15px;"><strong>No statistically significant effect of Turing on patient initiations at the overall A/B/C level.</strong></p>
+    <div class="stats">
+      <div class="stat" style="border-top:3px solid var(--purple);"><div class="n" style="font-size:22px;">+0.05pp</div><div class="l">AIPW ATT</div></div>
+      <div class="stat" style="border-top:3px solid var(--teal);"><div class="n" style="font-size:22px;">+0.02pp</div><div class="l">Grand Mean (15)</div></div>
+      <div class="stat" style="border-top:3px solid var(--deep);"><div class="n" style="font-size:22px;">0.42pp</div><div class="l">Estimator Range</div></div>
+      <div class="stat" style="border-top:3px solid var(--green);"><div class="n" style="font-size:14px;letter-spacing:-0.5px; color:var(--green);">CONVERGENT</div><div class="l">Assessment</div></div>
+    </div>
+    <div class="vs-box">
+      <div class="vs-side"><strong style="color:var(--green);">It means:</strong><br>With current data and covariates, we cannot detect a causal effect. The point estimate is near zero across multiple approaches.</div>
+      <div class="vs-div">vs.</div>
+      <div class="vs-side"><strong style="color:var(--red);">It does NOT mean:</strong><br>"Turing doesn't work." Absence of evidence ≠ evidence of absence. Missing ELAAD, HCA effects, rare disease lag, and subgroup heterogeneity mean the picture is incomplete.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GLOSSARY ==================== -->
+<div class="section" id="glossary">
+  <div class="section-header"><div class="section-num">★</div><div class="section-title">Complete Glossary</div></div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Term</th><th>Meaning</th><th>Our Value</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PS</strong></td><td>Propensity Score — P(Treatment=1 | X)</td><td>[0, 1]</td></tr>
+        <tr><td><strong>ATT</strong></td><td>Average Treatment Effect on the Treated</td><td>+0.05pp</td></tr>
+        <tr><td><strong>ITT</strong></td><td>Intention-to-Treat — treatment = receiving suggestion</td><td>Binary</td></tr>
+        <tr><td><strong>SMD</strong></td><td>Standardized Mean Difference — |SMD| < 0.1 = balanced</td><td>Max: 0.065</td></tr>
+        <tr><td><strong>AUC</strong></td><td>Area Under ROC Curve — diagnostic only</td><td>0.739 (CV)</td></tr>
+        <tr><td><strong>C</strong></td><td>Inverse regularization (logistic). Smaller = simpler.</td><td>0.01–10.0</td></tr>
+        <tr><td><strong>n_estimators</strong></td><td>Number of boosting trees. 1st in GBM(A/B/C).</td><td>50</td></tr>
+        <tr><td><strong>max_depth</strong></td><td>Tree depth. 2nd in GBM(A/B/C).</td><td>2</td></tr>
+        <tr><td><strong>learning_rate</strong></td><td>Shrinkage. 3rd in GBM(A/B/C).</td><td>0.1</td></tr>
+        <tr><td><strong>Caliper</strong></td><td>Max PS distance for match. 0.2 × SD(PS).</td><td>Dynamic</td></tr>
+        <tr><td><strong>AIPW</strong></td><td>Augmented IPW. Doubly robust: correct if either PS or outcome model is right. Combines IPW with outcome regression correction.</td><td>Primary</td></tr>
+        <tr><td><strong>IPW</strong></td><td>Inverse Probability Weighting. Control weight = PS/(1−PS). Full sample, deterministic.</td><td>+0.40pp</td></tr>
+        <tr><td><strong>NN 1:1</strong></td><td>Nearest-Neighbor 1:1 without replacement. Each control used once. ATT = mean paired difference.</td><td>1,524 pairs</td></tr>
+        <tr><td><strong>Fine Strat.</strong></td><td>10 equal-width PS bins, ATT per bin, weighted avg. NOT Full Matching.</td><td>−0.02pp</td></tr>
+        <tr><td><strong>Stratification (5)</strong></td><td>Cochran (1968) default: 5 bins removes ~90% of bias. Simplest stratification.</td><td>+0.23pp</td></tr>
+        <tr><td><strong>Full Matching</strong></td><td>Variable-ratio matched sets minimizing total distance. NOT used — we use fine stratification.</td><td>N/A</td></tr>
+        <tr><td><strong>Bootstrap</strong></td><td>Draw 1,000 resamples with replacement. SD of 1,000 ATTs = SE. Normal approx CI.</td><td>n=1,000</td></tr>
+        <tr><td><strong>SE (Std Error)</strong></td><td>Precision of the estimate. How much ATT would vary across repeated samples.</td><td>Various</td></tr>
+        <tr><td><strong>CI (Confidence Interval)</strong></td><td>Range containing true ATT in 95% of experiments. ATT ± 1.96 × SE.</td><td>95%</td></tr>
+        <tr><td><strong>5-Fold CV</strong></td><td>Cross-validation: 5 train/test splits. Average test AUC = honest estimate.</td><td>0.739±0.014</td></tr>
+        <tr><td><strong>ROC Curve</strong></td><td>Receiver Operating Characteristic. Plots true positive rate vs false positive rate at all thresholds.</td><td>—</td></tr>
+        <tr><td><strong>AUC</strong></td><td>Area Under ROC. 0.5=random, 1.0=perfect. Diagnostic only — never selects models.</td><td>0.739</td></tr>
+        <tr><td><strong>E-value</strong></td><td>Min risk ratio an unmeasured confounder needs with both treatment and outcome. Formula: RR + √(RR(RR−1)).</td><td>3.66</td></tr>
+        <tr><td><strong>Risk Ratio</strong></td><td>P(outcome|group A) / P(outcome|group B). Used in E-value framework.</td><td>—</td></tr>
+        <tr><td><strong>SUTVA</strong></td><td>Stable Unit Treatment Value Assumption. No interference, no treatment variations. Violated if HCPs share HCAs.</td><td>At risk</td></tr>
+        <tr><td><strong>Unconfoundedness</strong></td><td>Treatment independent of potential outcomes conditional on X. Core identifying assumption. Untestable.</td><td>Assumed</td></tr>
+        <tr><td><strong>Positivity</strong></td><td>0 &lt; P(Treatment|X) &lt; 1 for all X. Required for IPW/AIPW. Ensured by caliper.</td><td>Satisfied</td></tr>
+        <tr><td><strong>Common Support</strong></td><td>PS range where both groups exist. Matching only valid here.</td><td>Yes</td></tr>
+        <tr><td><strong>Selection Bias</strong></td><td>Systematic differences between groups due to non-random treatment assignment. The core problem PSM addresses.</td><td>—</td></tr>
+        <tr><td><strong>Confounding</strong></td><td>Variable that influences both treatment and outcome. Must be controlled to isolate causal effect.</td><td>11 covariates</td></tr>
+        <tr><td><strong>Endogeneity</strong></td><td>Treatment correlated with unobserved factors affecting outcome. ITT design avoids this.</td><td>Addressed</td></tr>
+        <tr><td><strong>Regularization</strong></td><td>Constraining model complexity to prevent overfitting. L2 penalty (logistic) or shrinkage+depth (GBM).</td><td>—</td></tr>
+        <tr><td><strong>Residuals</strong></td><td>Difference between predicted and actual values. GBM trains each tree on previous trees' residuals.</td><td>—</td></tr>
+        <tr><td><strong>Pooled SD</strong></td><td>Combined standard deviation of treated and control groups: √((SD²_T + SD²_C)/2). Used in SMD denominator.</td><td>—</td></tr>
+        <tr><td><strong>Outcome Model</strong></td><td>Logistic regression predicting Y (initiation) from X (covariates). Used by AIPW for doubly robust property.</td><td>Logistic</td></tr>
+        <tr><td><strong>Doubly Robust</strong></td><td>Consistent if EITHER PS model or outcome model is correct. Safety net against single-model misspecification.</td><td>AIPW</td></tr>
+        <tr><td><strong>Bonferroni</strong></td><td>Multiple-testing correction: α/n_tests. Conservative (controls family-wise error rate). 0.05/3 = 0.0167.</td><td>0.0167</td></tr>
+        <tr><td><strong>Seed</strong></td><td>Random Number Generator seed — a starting value for the pseudo-random sequence. Same seed = same results. Ensures reproducibility.</td><td>42</td></tr>
+        <tr><td><strong>Convergent</strong></td><td>Multiple methods/models → same conclusion. Strongest form of robustness evidence.</td><td>0.42pp range</td></tr>
+        <tr><td><strong>ELAAD</strong></td><td>Enterprise Longitudinal Anonymized Analytic Dataset (IQVIA). Patient-level claims/Rx data. Missing covariate.</td><td>Pending</td></tr>
+        <tr><td><strong>HCA</strong></td><td>Healthcare Account. Account-level unit for SUTVA-compliant analysis.</td><td>Pending</td></tr>
+        <tr><td><strong>NNT</strong></td><td>Number Needed to Treat (1/ATT). How many HCPs need suggestions for one incremental initiation.</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div style="text-align:center; padding:20px; color:var(--g500); font-size:11px; font-family:Verdana;">
+  Wayrilz Causal Impact Analysis &bull; v3 Clean Rebuild &bull; Canonical run: 2026-04-28_v3_clean_rebuild &bull; All numbers verified from code output
+</div>
+
+<!-- ==================== CHARTS ==================== -->
+<script>
+const PURPLE='#7A00E6',DEEP='#23004C',GREEN='#268500',RED='#DA3A16',TEAL='#007FAD',PINK='#D515B9';
+
+// --- NAV SCROLL HIGHLIGHT ---
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-100px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Smooth scroll
+navLinks.forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}));
+
+// --- CHART: Pre-match SMD ---
+const covs = ['log_call_vol','log_rte_vol','seg_C','spec_Other','region_NE','spec_PHO','spec_NRP','seg_B','region_West','region_South','spec_ON'];
+const preSMD = [0.627,0.501,0.445,0.228,0.203,0.193,0.110,0.104,0.099,0.087,0.083];
+new Chart(document.getElementById('chartPreSMD'),{
+  type:'bar',data:{labels:covs,datasets:[{label:'|SMD| Pre-Match',data:preSMD,
+    backgroundColor:preSMD.map(v=>v>=0.1?RED+'CC':GREEN+'CC'),borderRadius:4}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    scales:{x:{max:0.7,title:{display:true,text:'|SMD|',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{display:false}}},
+  plugins:[{id:'thresh',afterDraw(c){const x=c.scales.x.getPixelForValue(0.1);c.ctx.save();c.ctx.setLineDash([5,3]);c.ctx.strokeStyle=DEEP;c.ctx.lineWidth=2;c.ctx.beginPath();c.ctx.moveTo(x,c.scales.y.top);c.ctx.lineTo(x,c.scales.y.bottom);c.ctx.stroke();c.ctx.fillStyle=DEEP;c.ctx.font='10px Verdana';c.ctx.fillText('0.1 threshold',x+4,c.scales.y.top+12);c.ctx.restore();}}]
+});
+
+// --- CHART: Scatter AUC vs Pairs ---
+const balanced=[{x:.739,y:1524,s:true},{x:.739,y:1518},{x:.735,y:1507},{x:.735,y:1506},{x:.735,y:1504},
+  {x:.741,y:1493},{x:.741,y:1489},{x:.744,y:1478},{x:.744,y:1478},{x:.743,y:1474},
+  {x:.744,y:1451},{x:.744,y:1446},{x:.745,y:1434},{x:.745,y:1433},{x:.742,y:1422},{x:.742,y:1416},{x:.743,y:1414}];
+const failed=[{x:.734,y:1545},{x:.733,y:1513},{x:.743,y:1495},{x:.744,y:1463},{x:.738,y:1391}];
+new Chart(document.getElementById('chartScatter'),{
+  type:'scatter',data:{datasets:[
+    {label:'Balanced',data:balanced.filter(d=>!d.s),backgroundColor:TEAL+'88',borderColor:TEAL,pointRadius:6},
+    {label:'Selected',data:balanced.filter(d=>d.s),backgroundColor:PURPLE,borderColor:PURPLE,pointRadius:12,pointStyle:'star'},
+    {label:'Failed Balance',data:failed,backgroundColor:RED+'66',borderColor:RED,pointRadius:5,pointStyle:'crossRot'}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{title:{display:true,text:'AUC (5-Fold CV)',font:{weight:'bold',family:'Verdana'}},min:.731,max:.748},
+            y:{title:{display:true,text:'Matched Pairs',font:{weight:'bold',family:'Verdana'}},min:1380,max:1560}},
+    plugins:{legend:{position:'bottom',labels:{font:{family:'Verdana',size:10}}}}}
+});
+
+// --- CHART: Balance Pre vs Post ---
+const postSMD=[0.062,0.002,0.065,0.028,0.018,0.032,0.008,0.031,0.032,0.009,0.053];
+new Chart(document.getElementById('chartBalance'),{
+  type:'bar',data:{labels:covs,datasets:[
+    {label:'Pre-Match |SMD|',data:preSMD,backgroundColor:RED+'CC',borderRadius:3},
+    {label:'Post-Match |SMD|',data:postSMD,backgroundColor:GREEN+'CC',borderRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    scales:{x:{max:0.7,title:{display:true,text:'|SMD|',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{position:'bottom',labels:{font:{family:'Verdana',size:10}}}}},
+  plugins:[{id:'thresh2',afterDraw(c){const x=c.scales.x.getPixelForValue(0.1);c.ctx.save();c.ctx.setLineDash([5,3]);c.ctx.strokeStyle=DEEP;c.ctx.lineWidth=2;c.ctx.beginPath();c.ctx.moveTo(x,c.scales.y.top);c.ctx.lineTo(x,c.scales.y.bottom);c.ctx.stroke();c.ctx.fillStyle=DEEP;c.ctx.font='10px Verdana';c.ctx.fillText('0.1',x+4,c.scales.y.top+12);c.ctx.restore();}}]
+});
+
+// --- CHART: Forest Plot ---
+const eL=['AIPW (Primary)','NN 1:1','Stratification (5)','IPW','Fine Strat. (10)'];
+const eA=[0.05,0.07,0.23,0.40,-0.02],eLo=[-1.67,-1.16,-1.76,-1.40,-2.04],eHi=[1.76,1.60,1.94,2.06,1.78];
+const eC=[PURPLE,TEAL,DEEP,PINK,GREEN];
+new Chart(document.getElementById('chartForest'),{
+  type:'bar',data:{labels:eL,datasets:[{data:eA,backgroundColor:eC.map(c=>c+'CC'),borderColor:eC,borderWidth:1,borderRadius:4}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    scales:{x:{min:-2.5,max:2.5,title:{display:true,text:'ATT (pp)',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{display:false}}},
+  plugins:[{id:'ci',afterDraw(c){const ctx=c.ctx,xs=c.scales.x,m=c.getDatasetMeta(0);ctx.save();
+    m.data.forEach((b,i)=>{const y=b.y,xL=xs.getPixelForValue(eLo[i]),xH=xs.getPixelForValue(eHi[i]);
+      ctx.strokeStyle=eC[i];ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xL,y);ctx.lineTo(xH,y);ctx.stroke();
+      [xL,xH].forEach(px=>{ctx.beginPath();ctx.moveTo(px,y-5);ctx.lineTo(px,y+5);ctx.stroke();});});
+    const x0=xs.getPixelForValue(0);ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(x0,c.scales.y.top);ctx.lineTo(x0,c.scales.y.bottom);ctx.stroke();ctx.restore();}}]
+});
+
+// --- CHART: Seed Stability ---
+const seeds=['42','123','456','789','2026'];
+const sNN=[0.07,0.59,-0.26,0.26,-0.33],sIPW=[0.40,0.40,0.40,0.40,0.40],sAIPW=[0.05,0.05,0.05,0.05,0.05];
+new Chart(document.getElementById('chartSeeds'),{
+  type:'line',data:{labels:seeds,datasets:[
+    {label:'NN 1:1',data:sNN,borderColor:TEAL,backgroundColor:TEAL+'33',fill:true,tension:0.3,pointRadius:5},
+    {label:'IPW',data:sIPW,borderColor:PINK,borderDash:[6,3],pointRadius:4},
+    {label:'AIPW',data:sAIPW,borderColor:PURPLE,borderWidth:3,pointRadius:5}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    scales:{y:{title:{display:true,text:'ATT (pp)',font:{weight:'bold',family:'Verdana'}},min:-0.5,max:0.7},
+            x:{title:{display:true,text:'Random Seed',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{position:'bottom',labels:{font:{family:'Verdana',size:10}}}}}
+});
+
+// --- CHART: Robustness ---
+const rM=['GBM (50/2/0.1)','GBM (100/2/0.05)','Logistic C=10'];
+const rE=['NN 1:1','IPW','AIPW','Strat(5)','FineStrat(10)'];
+const rD=[[0.07,0.40,0.05,0.23,-0.02],[0.20,0.38,0.02,0.11,-0.09],[0.53,-0.90,-0.90,0.18,-0.03]];
+new Chart(document.getElementById('chartRobust'),{
+  type:'bar',data:{labels:rE,datasets:rM.map((m,i)=>({label:m,data:rD[i],
+    backgroundColor:[PURPLE,TEAL,DEEP][i]+'CC',borderColor:[PURPLE,TEAL,DEEP][i],borderWidth:1,borderRadius:3}))},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{y:{min:-1.2,max:0.7,title:{display:true,text:'ATT (pp)',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{position:'bottom',labels:{font:{family:'Verdana',size:10}}}}},
+  plugins:[{id:'zl',afterDraw(c){const y=c.scales.y.getPixelForValue(0);c.ctx.save();c.ctx.strokeStyle='#aaa';c.ctx.lineWidth=1;c.ctx.setLineDash([4,3]);c.ctx.beginPath();c.ctx.moveTo(c.scales.x.left,y);c.ctx.lineTo(c.scales.x.right,y);c.ctx.stroke();c.ctx.restore();}}]
+});
+
+// --- CHART: Subgroups ---
+const sL=['Segment A','Segment B','Segment C'],sA=[0.60,-0.66,0.68],sLo=[-4.65,-3.75,-1.02],sHi=[5.90,2.55,2.20];
+const sC=[PURPLE,TEAL,DEEP];
+new Chart(document.getElementById('chartSubgroup'),{
+  type:'bar',data:{labels:sL,datasets:[{data:sA,backgroundColor:sC.map(c=>c+'CC'),borderColor:sC,borderWidth:1,borderRadius:6}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{y:{min:-6,max:7,title:{display:true,text:'ATT (pp)',font:{weight:'bold',family:'Verdana'}}}},
+    plugins:{legend:{display:false}}},
+  plugins:[{id:'sci',afterDraw(c){const ctx=c.ctx,ys=c.scales.y,m=c.getDatasetMeta(0);ctx.save();
+    m.data.forEach((b,i)=>{const x=b.x,yL=ys.getPixelForValue(sLo[i]),yH=ys.getPixelForValue(sHi[i]);
+      ctx.strokeStyle=sC[i];ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,yL);ctx.lineTo(x,yH);ctx.stroke();
+      [yL,yH].forEach(py=>{ctx.beginPath();ctx.moveTo(x-6,py);ctx.lineTo(x+6,py);ctx.stroke();});});
+    const y0=ys.getPixelForValue(0);ctx.strokeStyle='#aaa';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(c.scales.x.left,y0);ctx.lineTo(c.scales.x.right,y0);ctx.stroke();ctx.restore();}}]
+});
+</script>
+
+</body>
+</html>
